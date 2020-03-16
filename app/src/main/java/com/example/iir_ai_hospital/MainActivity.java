@@ -8,14 +8,18 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+
+import com.asus.robotframework.API.RobotAPI;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static RobotAPI robotAPI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initRobotApi();
 
         /*
          * Hide navigate bar
@@ -40,6 +44,34 @@ public class MainActivity extends AppCompatActivity {
         if(!hasPermission(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_ALL);
         }
+    }
+
+    private void initRobotApi() {
+        robotAPI = new RobotAPI(this);
+
+        /*
+         * Avoid shy behavior
+         */
+        robotAPI.robot.setPressOnHeadAction(false);
+
+        /*
+         * Avoid screen jump back to junior default face
+         */
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        /*
+         * Avoid keyboard pop out in Fragment contain editText
+         */
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        /*
+         * very important
+         * https://zenbo.asus.com/developer/documents/Zenbo-SDK/DialogSystem
+         * setTouchOnlySignal可以關掉語音hey zenbo觸發zenbo mode
+         */
+        robotAPI.robot.setTouchOnlySignal(true);
+        robotAPI.robot.setVoiceTrigger(false);
+
     }
 
     private boolean hasPermission(Context context, String... permissions) {
