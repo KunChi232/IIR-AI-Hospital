@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_userID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="身分證字號:"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_userBirth" />
+
+    <TextView
+        android:id="@+id/tv_userBirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="生日:"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_userID"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_userName" />
+
+    <TextView
+        android:id="@+id/tv_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="姓名:"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_userBirth"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/et_userBirthYear"
+        app:layout_constraintStart_toEndOf="@+id/tv_userName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <EditText
+        android:id="@+id/et_userBirthYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:ems="5"
+        android:hint="民國"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/et_userID"
+        app:layout_constraintEnd_toStartOf="@+id/et_userBirthMonth"
+        app:layout_constraintStart_toEndOf="@+id/tv_userBirth"
+        app:layout_constraintTop_toBottomOf="@+id/et_userName" />
+
+    <EditText
+        android:id="@+id/et_userID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_userID"
+        app:layout_constraintTop_toBottomOf="@+id/et_userBirthYear" />
+
+    <EditText
+        android:id="@+id/et_userBirthMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:ems="4"
+        android:hint="月"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/et_userBirthYear"
+        app:layout_constraintEnd_toStartOf="@+id/et_userBirthDay"
+        app:layout_constraintStart_toEndOf="@+id/et_userBirthYear"
+        app:layout_constraintTop_toTopOf="@+id/et_userBirthYear" />
+
+    <EditText
+        android:id="@+id/et_userBirthDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="4"
+        android:hint="日"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/et_userBirthMonth"
+        app:layout_constraintStart_toEndOf="@+id/et_userBirthMonth"
+        app:layout_constraintTop_toTopOf="@+id/et_userBirthMonth" />
+
+    <ImageButton
+        android:id="@+id/imgBtn_next"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/outline_arrow_forward_ios_black_48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_userBirthDay"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/et_userBirthDay" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+</androidx.constraintlayout.widget.ConstraintLayout>
