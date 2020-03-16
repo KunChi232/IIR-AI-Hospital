@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.RECORD_AUDIO,
                 Manifest.permission.CAMERA,
         };
-        if(hasPermission(this, PERMISSIONS)) {
+        if(!hasPermission(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_ALL);
         }
     }
