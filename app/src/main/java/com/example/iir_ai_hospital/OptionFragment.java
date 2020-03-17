@@ -24,8 +24,7 @@ public class OptionFragment extends Fragment {
         JumpNextFragment(UserTypeFragment.newInstance(), "UserType");
     }
     @OnClick(R.id.btn_negative) void onNegativeClick() {
-        Log.d("positive", "click");
-        JumpNextFragment(UserTypeFragment.newInstance(), "UserType");
+
     }
 
     public static OptionFragment newInstance() {
@@ -40,7 +39,7 @@ public class OptionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_questions, container, false);
+        View view = inflater.inflate(R.layout.fragment_option, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
