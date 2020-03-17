@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,6 +18,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
+
+    <EditText
+        android:id="@+id/et_endday_day"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:ems="2"
+        android:hint="日"
+        android:inputType="textPersonName"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_endday_month"
+        app:layout_constraintEnd_toEndOf="@+id/et_startday_day"
+        app:layout_constraintStart_toEndOf="@+id/et_endday_month"
+        app:layout_constraintTop_toTopOf="@+id/et_endday_month" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
@@ -58,36 +73,29 @@
         app:srcCompat="@drawable/back_white_black" />
 
     <TextView
-        android:id="@+id/tv_questions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="tv_questions"
-        android:textSize="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/guideline7" />
-
-    <TextView
         android:id="@+id/tv_startday"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="20dp"
-        android:text="起始日期:"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="30dp"
+        android:text="停留起始日期"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_endday"
-        app:layout_constraintStart_toEndOf="@+id/imgBtn_previousP" />
+        app:layout_constraintEnd_toStartOf="@+id/et_startday_year"
+        app:layout_constraintStart_toEndOf="@+id/imgBtn_previousP"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/tv_endday"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:text="結束日期:"
+        android:layout_marginEnd="30dp"
+        android:text="停留結束日期"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
-        app:layout_constraintStart_toEndOf="@+id/imgBtn_previousP" />
+        app:layout_constraintEnd_toStartOf="@+id/et_endday_year"
+        app:layout_constraintStart_toStartOf="@+id/tv_startday"
+        app:layout_constraintTop_toBottomOf="@+id/tv_startday" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
@@ -98,10 +106,10 @@
 
     <EditText
         android:id="@+id/et_startday_year"
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:ems="5"
+        android:ems="4"
         android:hint="年"
         android:inputType="textPersonName"
         android:textSize="40dp"
@@ -112,10 +120,10 @@
 
     <EditText
         android:id="@+id/et_startday_month"
-        android:layout_width="wrap_content"
+        android:layout_width="143dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:ems="4"
+        android:ems="3"
         android:hint="月"
         android:inputType="textPersonName"
         android:textSize="40dp"
@@ -126,10 +134,10 @@
 
     <EditText
         android:id="@+id/et_startday_day"
-        android:layout_width="wrap_content"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:ems="4"
+        android:ems="2"
         android:hint="日"
         android:inputType="textPersonName"
         android:textSize="40dp"
@@ -139,10 +147,10 @@
 
     <EditText
         android:id="@+id/et_endday_year"
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:ems="5"
+        android:ems="4"
         android:hint="年"
         android:inputType="textPersonName"
         android:textSize="40dp"
@@ -153,10 +161,10 @@
 
     <EditText
         android:id="@+id/et_endday_month"
-        android:layout_width="wrap_content"
+        android:layout_width="143dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:ems="4"
+        android:ems="3"
         android:hint="月"
         android:inputType="textPersonName"
         android:textSize="40dp"
@@ -165,16 +173,15 @@
         app:layout_constraintStart_toEndOf="@+id/et_endday_year"
         app:layout_constraintTop_toTopOf="@+id/et_endday_year" />
 
-    <EditText
-        android:id="@+id/et_endday_day"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:ems="4"
-        android:hint="日"
-        android:inputType="textPersonName"
+        android:layout_marginTop="64dp"
+        android:text="承上題"
         android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_endday_month"
-        app:layout_constraintStart_toEndOf="@+id/et_endday_month"
-        app:layout_constraintTop_toTopOf="@+id/et_endday_month" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

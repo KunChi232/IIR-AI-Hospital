@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
          * Avoid shy behavior
          */
         robotAPI.robot.setPressOnHeadAction(false);
-
         /*
          * Avoid screen jump back to junior default face
          */
