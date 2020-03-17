@@ -2,7 +2,6 @@ package com.example.iir_ai_hospital;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import com.asus.robotframework.API.RobotAPI;
-import com.example.iir_ai_hospital.utils.Utils;
 
 import static com.example.iir_ai_hospital.utils.Utils.robotAPI;
 import static com.example.iir_ai_hospital.utils.Utils.mainActivity;

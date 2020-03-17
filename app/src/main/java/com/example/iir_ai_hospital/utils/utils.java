@@ -23,4 +23,13 @@ public class Utils {
                     .commit();
         }
     }
+
+    public static void PopBackFragment() {
+        if(mainActivity == null) {
+            Log.e("utils","MainActivity is null");
+        } else {
+            mainActivity.getSupportFragmentManager()
+                    .popBackStack();
+        }
+    }
 }
