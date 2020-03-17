@@ -15,7 +15,11 @@ public class Utils {
     public static void JumpNextFragment(Fragment f, String name) {
         if(mainActivity == null) {
             Log.e("utils","MainActivity is null");
-        } else {
+        }
+        else {
+            if(name.equals("Login")) {
+                clearFragmentPopStack();
+            }
             mainActivity.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, f)
@@ -30,6 +34,13 @@ public class Utils {
         } else {
             mainActivity.getSupportFragmentManager()
                     .popBackStack();
+        }
+    }
+
+    private static void clearFragmentPopStack() {
+        int count = mainActivity.getSupportFragmentManager().getBackStackEntryCount();
+        for(int i = 0; i < count; ++i) {
+            mainActivity.getSupportFragmentManager().popBackStack();
         }
     }
 }
