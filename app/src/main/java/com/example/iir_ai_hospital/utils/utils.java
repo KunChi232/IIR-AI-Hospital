@@ -20,6 +20,8 @@ public class Utils {
             if(name.equals("Login")) {
                 clearFragmentPopStack();
             }
+            robotAPI.robot.stopSpeak();
+
             mainActivity.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.main_container, f)

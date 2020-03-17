@@ -95,9 +95,6 @@ public class UserTypeFragment extends Fragment {
                         JsonObject responseObject = response.body();
                         if(response.isSuccessful() && responseObject != null) {
                             Question question = new Gson().fromJson(responseObject, Question.class);
-                            if(question.getEnd().equals("Y")){
-                                JumpNextFragment(LoginFragment.newInstance(), "Login");
-                            }
                             Log.d("startQuestion", question.getQuestion_type());
                             if(question.getQuestion_type().equals("options") ){
                                 Bundle bundle = new Bundle();

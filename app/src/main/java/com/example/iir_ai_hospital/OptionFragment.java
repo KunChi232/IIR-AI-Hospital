@@ -38,7 +38,6 @@ public class OptionFragment extends Fragment {
     @OnClick(R.id.btn_positive) void onPositiveClick() {
         Log.d("Positive", "click");
         Log.d("Positive", LoginFragment.UUID);
-        robotAPI.robot.stopSpeak();
         nextQuestion(
                 new HashMap<String, String>() {{
                     put("uuid", LoginFragment.UUID);
@@ -47,7 +46,6 @@ public class OptionFragment extends Fragment {
         );
     }
     @OnClick(R.id.btn_negative) void onNegativeClick() {
-        robotAPI.robot.stopSpeak();
         nextQuestion(
                 new HashMap<String, String>() {{
                     put("uuid", LoginFragment.UUID);
@@ -93,6 +91,7 @@ public class OptionFragment extends Fragment {
                         if(response.isSuccessful() && responseObject != null) {
                             Question question = new Gson().fromJson(responseObject, Question.class);
                             Log.d("startQuestion", question.getQuestion_type());
+
                             if(question.getQuestion_type().equals("options")) {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("question", question.getQuestion().get(0));
