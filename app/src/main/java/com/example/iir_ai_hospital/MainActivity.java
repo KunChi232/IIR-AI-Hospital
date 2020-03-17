@@ -2,22 +2,30 @@ package com.example.iir_ai_hospital;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
+import androidx.fragment.app.Fragment;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-
 import com.asus.robotframework.API.RobotAPI;
+import com.example.iir_ai_hospital.utils.Utils;
+
+import static com.example.iir_ai_hospital.utils.Utils.robotAPI;
+import static com.example.iir_ai_hospital.utils.Utils.mainActivity;
+import static com.example.iir_ai_hospital.utils.Utils.JumpNextFragment;
 
 public class MainActivity extends AppCompatActivity {
-    public static RobotAPI robotAPI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.container);
+
+        /*
+         * Hide title bar
+         */
+        getSupportActionBar().hide();;
 
         initRobotApi();
 
@@ -30,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         this.getWindow().getDecorView().setSystemUiVisibility(flags);
+
+
+        JumpNextFragment(LoginFragment.newInstance(), "Login");
     }
 
     @Override
@@ -47,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRobotApi() {
-        robotAPI = new RobotAPI(this);
-
+        initUtils();
         /*
          * Avoid shy behavior
          */
@@ -83,5 +93,10 @@ public class MainActivity extends AppCompatActivity {
              }
         }
         return true;
+    }
+
+    private void initUtils() {
+        robotAPI = new RobotAPI(this);
+        mainActivity = this;
     }
 }
