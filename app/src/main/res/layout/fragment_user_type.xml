@@ -163,12 +163,12 @@
         android:inputType="textPersonName"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/et_endday_year"
-        app:layout_constraintEnd_toStartOf="@+id/editText6"
+        app:layout_constraintEnd_toStartOf="@+id/et_endday_day"
         app:layout_constraintStart_toEndOf="@+id/et_endday_year"
         app:layout_constraintTop_toTopOf="@+id/et_endday_year" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/et_endday_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
