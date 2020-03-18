@@ -42,17 +42,18 @@ public class MultiChoiceFragment extends Fragment {
 
 //    @BindView(R.id.spinner_multichoice) Spinner multiChoice;
     @BindView(R.id.tv_question) TextView tv_question;
+    @BindView(R.id.tv_question_number) TextView tv_question_number;
     @BindView(R.id.dynamicLayout) LinearLayout dynamicLayout;
-//    @OnClick(R.id.imgBtn_nextP) void onNextProblemClick() {
-//        nextQuestion(
-//                new HashMap<String, String>(){{
-//                    put("uuid", LoginFragment.UUID);
-//                    put("Answer", String.valueOf(multiChoice.getSelectedItemPosition()));
-//                }}
-//        );
-//    }
+
     @OnClick(R.id.imgBtn_back) void onBackClick() {
         JumpNextFragment(LoginFragment.newInstance() ,"Login");
+    }
+    @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
+        preQuestion(
+                new HashMap<String, String>() {{
+                    put("uuid", LoginFragment.UUID);
+                }}
+        );
     }
     public static MultiChoiceFragment newInstance(Bundle args) {
         MultiChoiceFragment fragment = new MultiChoiceFragment();
@@ -73,9 +74,8 @@ public class MultiChoiceFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         tv_question.setText(bundle.getString("question"));
+        tv_question_number.setText(bundle.getString("question_number"));
         robotAPI.robot.speak(bundle.getString("question"));
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),R.layout.spinner_text_view, bundle.getStringArrayList("option"));
-//        multiChoice.setAdapter(adapter);
         dynamicButton(Objects.requireNonNull(bundle.getStringArrayList("option")));
         return view;
     }
@@ -90,23 +90,29 @@ public class MultiChoiceFragment extends Fragment {
                         if(response.isSuccessful() && responseObject != null) {
                             Question question = new Gson().fromJson(responseObject, Question.class);
 
-                            Log.d("startQuestion", question.getQuestion_type());
-                            if(question.getQuestion_type().equals("options")) {
-                                Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion().get(0));
-                                JumpNextFragment(OptionFragment.newInstance(bundle), "optionFrag");
+                            LoginFragment.ISEND = question.getEnd();
+                            if(LoginFragment.ISEND.equals("Y")) {
+                                JumpNextFragment(LoginFragment.newInstance(), "Login");
                             }
-                            else if(question.getQuestion_type().equals("date")) {
-                                Bundle bundle = new Bundle();
-//                                bundle.putString("question", question.getQuestion().get(0));
-                                bundle.putStringArrayList("question", question.getQuestion());
-                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "userType");
-                            }
-                            else if(question.getQuestion_type().equals("multi-options")) {
-                                Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion().get(0));
-                                bundle.putStringArrayList("option", question.getOptions());
-                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "multiChoice");
+                            else {
+                                if (question.getQuestion_type().equals("options")) {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
+                                    bundle.putString("question_number", question.getQuestion_number());
+                                    JumpNextFragment(OptionFragment.newInstance(bundle), "optionFrag");
+                                } else if (question.getQuestion_type().equals("date")) {
+                                    Bundle bundle = new Bundle();
+//                                bundle.putString("question", question.getQuestion());
+                                    bundle.putStringArrayList("question", question.getQuestion(LoginFragment.CURRENT_LANG));
+                                    bundle.putString("question_number", question.getQuestion_number());
+                                    JumpNextFragment(UserTypeFragment.newInstance(bundle), "userType");
+                                } else if (question.getQuestion_type().equals("multi-options")) {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
+                                    bundle.putStringArrayList("option", question.getOptions(LoginFragment.CURRENT_LANG));
+                                    bundle.putString("question_number", question.getQuestion_number());
+                                    JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "multiChoice");
+                                }
                             }
                         }
                     }
@@ -118,7 +124,46 @@ public class MultiChoiceFragment extends Fragment {
                 });
     }
 
+    private void preQuestion(Map<String, String> params) {
+        HospitalServerClient hospitalServerClient = HospitalQuestionServerRequest.getInstance().getRetrofitInterface();
+        hospitalServerClient.preQuestion(params)
+                .enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        JsonObject responseObject = response.body();
+                        if(response.isSuccessful() && responseObject != null) {
+                            Question question = new Gson().fromJson(responseObject, Question.class);
 
+                            Log.d("startQuestion", question.getQuestion_type());
+                            if(question.getQuestion_type().equals("options")) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
+                                bundle.putString("question_number", question.getQuestion_number());
+                                JumpNextFragment(OptionFragment.newInstance(bundle), "optionFrag");
+                            }
+                            else if(question.getQuestion_type().equals("date")) {
+                                Bundle bundle = new Bundle();
+//                                bundle.putString("question", question.getQuestion().get(0));
+                                bundle.putStringArrayList("question", question.getQuestion(LoginFragment.CURRENT_LANG));
+                                bundle.putString("question_number", question.getQuestion_number());
+                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "userType");
+                            }
+                            else if(question.getQuestion_type().equals("multi-options")) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
+                                bundle.putStringArrayList("option", question.getOptions(LoginFragment.CURRENT_LANG));
+                                bundle.putString("question_number", question.getQuestion_number());
+                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "multiChoice");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                    }
+                });
+    }
     private void dynamicButton(ArrayList<String> multiChoice) {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -128,8 +173,6 @@ public class MultiChoiceFragment extends Fragment {
             Button btn = new Button(getContext());
             btn.setText(multiChoice.get(j));
             btn.setTextSize(30);
-            btn.setWidth(150);
-            btn.setHeight(80);
             btn.setOnClickListener(view -> nextQuestion(
                     new HashMap<String, String>() {{
                         put("uuid", LoginFragment.UUID);

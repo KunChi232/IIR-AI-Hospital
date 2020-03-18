@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">IIR-AI-Hospital</string>
+    <string name="user_name">姓名</string>
+    <string name="user_id">身份證</string>
+    <string name="user_birth">生日</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="language">語言</string>
 </resources>

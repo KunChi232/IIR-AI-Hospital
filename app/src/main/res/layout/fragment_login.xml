@@ -9,7 +9,7 @@
         android:id="@+id/tv_userID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="身分證"
+        android:text="@string/user_id"
         android:textSize="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/et_userID"
@@ -20,10 +20,9 @@
         android:id="@+id/tv_userBirth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="生日"
+        android:text="@string/user_birth"
         android:textSize="80dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_userID"
-        app:layout_constraintEnd_toStartOf="@+id/et_userBirthYear"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_userName" />
 
@@ -31,7 +30,7 @@
         android:id="@+id/tv_userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="姓名"
+        android:text="@string/user_name"
         android:textSize="80dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_userBirth"
         app:layout_constraintEnd_toStartOf="@+id/et_userName"
@@ -46,9 +45,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/et_userBirthYear"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_userName"
         app:layout_constraintStart_toEndOf="@+id/tv_userName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tv_userName" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -58,21 +57,6 @@
         app:layout_constraintGuide_percent="0.2" />
 
     <EditText
-        android:id="@+id/et_userBirthYear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="10dp"
-        android:ems="4"
-        android:hint="年"
-        android:inputType="textPersonName"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/et_userID"
-        app:layout_constraintEnd_toStartOf="@+id/et_userBirthMonth"
-        app:layout_constraintStart_toEndOf="@+id/tv_userBirth"
-        app:layout_constraintTop_toBottomOf="@+id/et_userName" />
-
-    <EditText
         android:id="@+id/et_userID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,45 +64,19 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_userID"
         app:layout_constraintStart_toEndOf="@+id/tv_userID"
-        app:layout_constraintTop_toBottomOf="@+id/et_userBirthYear" />
-
-    <EditText
-        android:id="@+id/et_userBirthMonth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:ems="3"
-        android:hint="月"
-        android:inputType="textPersonName"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_userBirthYear"
-        app:layout_constraintEnd_toStartOf="@+id/et_userBirthDay"
-        app:layout_constraintStart_toEndOf="@+id/et_userBirthYear"
-        app:layout_constraintTop_toTopOf="@+id/et_userBirthYear" />
-
-    <EditText
-        android:id="@+id/et_userBirthDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:ems="2"
-        android:hint="日"
-        android:inputType="textPersonName"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_userBirthMonth"
-        app:layout_constraintStart_toEndOf="@+id/et_userBirthMonth"
-        app:layout_constraintTop_toTopOf="@+id/et_userBirthMonth" />
+        app:layout_constraintTop_toTopOf="@+id/tv_userID" />
 
     <ImageButton
         android:id="@+id/imgBtn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/next_white"
-        app:layout_constraintBottom_toBottomOf="@+id/et_userBirthDay"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/et_userBirthDay" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -136,4 +94,98 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/btn_back" />
+
+    <Spinner
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:id="@+id/spinner_birth_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_userBirth"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/tv_userBirth"
+        app:layout_constraintTop_toTopOf="@+id/tv_userBirth" />
+
+    <Spinner
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:id="@+id/spinner_birth_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <Spinner
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:id="@+id/spinner_birth_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="@string/year"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_birth_year"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_birth_month"
+        app:layout_constraintStart_toEndOf="@+id/spinner_birth_year"
+        app:layout_constraintTop_toTopOf="@+id/spinner_birth_year" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="@string/month"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_birth_month"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_birth_day"
+        app:layout_constraintStart_toEndOf="@+id/spinner_birth_month"
+        app:layout_constraintTop_toTopOf="@+id/spinner_birth_month" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="@string/day"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_birth_day"
+        app:layout_constraintStart_toEndOf="@+id/spinner_birth_day"
+        app:layout_constraintTop_toTopOf="@+id/spinner_birth_day" />
+
+    <Spinner
+        android:id="@+id/spinner_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/language"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_language"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_language"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
