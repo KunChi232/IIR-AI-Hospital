@@ -62,11 +62,15 @@ public class OptionFragment extends Fragment {
         if(LoginFragment.QUESTION_COUNTER == 1) {
             JumpNextFragment(LoginFragment.newInstance() ,"Login");
         }
-        preQuestion(
-                new HashMap<String, String>() {{
-                    put("uuid", LoginFragment.UUID);
-                }}
-        );
+        else {
+            LoginFragment.QUESTION_COUNTER --;
+            preQuestion(
+                    new HashMap<String, String>() {{
+                        put("uuid", LoginFragment.UUID);
+                    }}
+            );
+        }
+
     }
     public static OptionFragment newInstance(Bundle args) {
         OptionFragment fragment = new OptionFragment();
@@ -104,6 +108,7 @@ public class OptionFragment extends Fragment {
                             Log.d("startQuestion", question.getQuestion_type());
 
                             LoginFragment.ISEND = question.getEnd();
+                            LoginFragment.QUESTION_COUNTER ++;
                             if(LoginFragment.ISEND.equals("Y")) {
                                 JumpNextFragment(LoginFragment.newInstance(), "Login");
                             }

@@ -49,11 +49,18 @@ public class MultiChoiceFragment extends Fragment {
         JumpNextFragment(LoginFragment.newInstance() ,"Login");
     }
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
-        preQuestion(
-                new HashMap<String, String>() {{
-                    put("uuid", LoginFragment.UUID);
-                }}
-        );
+        if(LoginFragment.QUESTION_COUNTER == 1) {
+            JumpNextFragment(LoginFragment.newInstance() ,"Login");
+        }
+        else{
+            LoginFragment.QUESTION_COUNTER --;
+            preQuestion(
+                    new HashMap<String, String>() {{
+                        put("uuid", LoginFragment.UUID);
+                    }}
+            );
+        }
+
     }
     public static MultiChoiceFragment newInstance(Bundle args) {
         MultiChoiceFragment fragment = new MultiChoiceFragment();
@@ -91,6 +98,7 @@ public class MultiChoiceFragment extends Fragment {
                             Question question = new Gson().fromJson(responseObject, Question.class);
 
                             LoginFragment.ISEND = question.getEnd();
+                            LoginFragment.QUESTION_COUNTER ++;
                             if(LoginFragment.ISEND.equals("Y")) {
                                 JumpNextFragment(LoginFragment.newInstance(), "Login");
                             }

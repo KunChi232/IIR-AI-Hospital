@@ -66,9 +66,9 @@ public class Question {
     }
     public ArrayList<String> getOptions(String lang) {
         if(lang.equals("ch"))
-            return question;
+            return options;
         else
-            return question_en;
+            return options_en;
     }
     public String getEnd() {
         return end;

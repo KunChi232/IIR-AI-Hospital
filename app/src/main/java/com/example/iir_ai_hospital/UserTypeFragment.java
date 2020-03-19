@@ -68,11 +68,14 @@ public class UserTypeFragment extends Fragment {
         if(LoginFragment.QUESTION_COUNTER == 1) {
             JumpNextFragment(LoginFragment.newInstance() ,"Login");
         }
-        preQuestion(
-                new HashMap<String, String>() {{
-                    put("uuid", LoginFragment.UUID);
-                }}
-        );
+        else{
+            LoginFragment.QUESTION_COUNTER --;
+            preQuestion(
+                    new HashMap<String, String>() {{
+                        put("uuid", LoginFragment.UUID);
+                    }}
+            );
+        }
     }
     @OnClick(R.id.imgBtn_back) void onBackClick() {
         JumpNextFragment(LoginFragment.newInstance() ,"Login");
@@ -113,6 +116,7 @@ public class UserTypeFragment extends Fragment {
                             Log.d("startQuestion", question.getQuestion_type());
 
                             LoginFragment.ISEND = question.getEnd();
+                            LoginFragment.QUESTION_COUNTER ++;
                             if(LoginFragment.ISEND.equals("Y")) {
                                 JumpNextFragment(LoginFragment.newInstance(), "Login");
                             }
@@ -129,6 +133,7 @@ public class UserTypeFragment extends Fragment {
                                     bundle.putString("question_number", question.getQuestion_number());
                                     JumpNextFragment(UserTypeFragment.newInstance(bundle), "userType");
                                 } else if (question.getQuestion_type().equals("multi-options")) {
+                                    Log.d("multi-options", question.getOptions(LoginFragment.CURRENT_LANG).toString());
                                     Bundle bundle = new Bundle();
                                     bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
                                     bundle.putStringArrayList("option", question.getOptions(LoginFragment.CURRENT_LANG));
