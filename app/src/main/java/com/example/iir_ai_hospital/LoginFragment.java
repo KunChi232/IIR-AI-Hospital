@@ -88,7 +88,7 @@ public class LoginFragment extends Fragment {
 
     @OnItemSelected(R.id.spinner_language) void onLanguageSelected() {
 
-        pref.edit().putInt("lang", spinnerLanguage.getSelectedItemPosition()).commit();
+        pref.edit().putInt("lang", spinnerLanguage.getSelectedItemPosition()).apply();
 
         Log.d("onLanguageSelected", spinnerLanguage.getSelectedItem().toString());
         String lang = spinnerLanguage.getSelectedItem().toString();

@@ -78,7 +78,7 @@ public class MultiChoiceFragment extends Fragment {
         dynamicButton(Objects.requireNonNull(bundle.getStringArrayList("option")));
         return view;
     }
-    
+
     private void dynamicButton(ArrayList<String> multiChoice) {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
