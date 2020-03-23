@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.fragment.app.Fragment;
 
 import com.asus.robotframework.API.RobotAPI;
+import com.example.iir_ai_hospital.LoginFragment;
 import com.example.iir_ai_hospital.MainActivity;
 import com.example.iir_ai_hospital.R;
 
@@ -25,6 +26,9 @@ public class Utils {
         else {
             if(name.equals("Login")) {
                 clearFragmentPopStack();
+                LoginFragment.QUESTION_COUNTER = 0;
+                LoginFragment.ISEND_FLAG = false;
+                LoginFragment.ISEND = "N";
             }
             robotAPI.robot.stopSpeak();
 

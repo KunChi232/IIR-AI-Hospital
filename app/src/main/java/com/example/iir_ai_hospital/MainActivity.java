@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         int PERMISSIONS_ALL = 1;
         String[] PERMISSIONS = {
                 Manifest.permission.RECORD_AUDIO,

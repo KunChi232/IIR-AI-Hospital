@@ -29,14 +29,12 @@ import java.util.Map;
 
 import static com.example.iir_ai_hospital.utils.Utils.PopBackFragment;
 import static com.example.iir_ai_hospital.utils.Utils.JumpNextFragment;
-import static com.example.iir_ai_hospital.utils.Utils.mainActivity;
 import static com.example.iir_ai_hospital.utils.Utils.setLocale;
 
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 import butterknife.OnItemSelected;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,6 +49,7 @@ public class LoginFragment extends Fragment {
     public static String ISEND = "N";
     public static String CURRENT_LANG = "ch";
     public static int QUESTION_COUNTER = 0;
+    public static boolean ISEND_FLAG = false;
     private SharedPreferences pref;
 
     @BindView(R.id.et_userName) EditText userName;
@@ -68,7 +67,7 @@ public class LoginFragment extends Fragment {
 //                    put("birth", userBirthYear.getText().toString() + userBirthMonth.getText().toString() + userBirthDay.getText().toString());
 //                }}
 //        );
-
+//            JumpNextFragment(SignatureFragment.newInstance(), "Signature");
         startFirstQuestion(
 //                new HashMap<String, String>() {{
 //                    put("id_number", userID.getText().toString());
@@ -136,25 +135,31 @@ public class LoginFragment extends Fragment {
                             UUID = question.getUuid();
                             ISEND = question.getEnd();
                             QUESTION_COUNTER ++;
-                            if(question.getQuestion_type().equals("options")) {
+                            if(question.getQuestion_type().equals("R")) {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(OptionFragment.newInstance(bundle), "optionFrag");
+                                JumpNextFragment(OptionFragment.newInstance(bundle), "R");
                             }
-                            else if(question.getQuestion_type().equals("date")) {
+                            else if(question.getQuestion_type().equals("T")) {
                                 Bundle bundle = new Bundle();
 //                                bundle.putString("question", question.getQuestion());
-                                bundle.putStringArrayList("question", question.getQuestion(LoginFragment.CURRENT_LANG));
+                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "userType");
+                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "T");
                             }
-                            else if(question.getQuestion_type().equals("multi-options")) {
+                            else if(question.getQuestion_type().equals("RS")) {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
                                 bundle.putStringArrayList("option", question.getOptions(LoginFragment.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "multiChoice");
+                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
+                            }
+                            else if(question.getQuestion_type().equals("D")) {
+                                Bundle bundle = new Bundle();
+                                bundle.putStringArrayList("question", question.getQuestion(LoginFragment.CURRENT_LANG));
+                                bundle.putString("question_number", question.getQuestion_number());
+                                JumpNextFragment(DateFragment.newInstance(bundle), "D");
                             }
                         }
                     }

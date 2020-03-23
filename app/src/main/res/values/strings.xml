@@ -7,4 +7,6 @@
     <string name="month">月</string>
     <string name="day">日</string>
     <string name="language">語言</string>
+    <string name="signature">簽名</string>
+    <string name="clear_signature">清空</string>
 </resources>

@@ -8,4 +8,6 @@
     <string name="month">Month</string>
     <string name="day">Day</string>
     <string name="language">Language</string>
+    <string name="signature">Signature</string>
+    <string name="clear_signature">Clear</string>
 </resources>
