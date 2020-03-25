@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,12 +57,19 @@ public class SignatureFragment extends Fragment {
 
     @OnClick(R.id.imgBtn_send) void onSignatureSendClick() {
         String encoded = signatureView.saveImageToBase64();
-        endQuestion(
-                new HashMap<String, String>() {{
-                    put("uuid", LoginFragment.UUID);
-                    put("signature", encoded);
-                }}
-        );
+        Log.d("signature", encoded);
+        if(encoded.trim().length() > 0){
+            endQuestion(
+                    new HashMap<String, String>() {{
+                        put("uuid", LoginFragment.UUID);
+                        put("signature", encoded);
+                    }}
+            );
+        }
+        else {
+            Toast.makeText(getContext(), R.string.signature_empty, Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public static SignatureFragment newInstance() {

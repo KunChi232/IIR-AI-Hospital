@@ -89,7 +89,7 @@ public class MultiChoiceFragment extends Fragment {
             btn.setText(multiChoice.get(j));
             btn.setTextSize(30);
             btn.setOnClickListener(view -> nextQuestion(
-                    new HashMap<String, String>() {{
+                    new HashMap<String, Object>() {{
                         put("uuid", LoginFragment.UUID);
                         put("answer", String.valueOf(j));
                     }}

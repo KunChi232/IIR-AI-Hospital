@@ -13,24 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.iir_ai_hospital.questionObject.Question;
-import com.example.iir_ai_hospital.server.HospitalQuestionServerRequest;
-import com.example.iir_ai_hospital.server.HospitalServerClient;
+import com.example.iir_ai_hospital.questionObject.DateAnswerRequestBody;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.example.iir_ai_hospital.utils.Utils.JumpNextFragment;
 import static com.example.iir_ai_hospital.server.HospitalQuestionServerRequest.nextQuestion;
@@ -55,21 +48,27 @@ public class DateFragment extends Fragment {
     private int QUESTUON_NUMBER = 1;
     @OnClick(R.id.imgBtn_nextP) void onNextProblemClick() {
         if(QUESTUON_NUMBER > 1){
+            DateAnswerRequestBody answerRequestBody = new DateAnswerRequestBody(
+                    startday_year.getSelectedItem().toString() + "/" + startday_month.getSelectedItem().toString() + "/" + startday_day.getSelectedItem().toString(),
+                    endday_year.getSelectedItem().toString() + "/" + endday_month.getSelectedItem().toString() + "/" + endday_day.getSelectedItem().toString()
+            );
             nextQuestion(
-                    new HashMap<String, String>(){{
+                    new HashMap<String, Object>(){{
                         put("uuid", LoginFragment.UUID);
-                        put("Answer",startday_year.getSelectedItem().toString() + startday_month.getSelectedItem().toString() + startday_day.getSelectedItem().toString() + "/" +
-                                endday_year.getSelectedItem().toString() + endday_month.getSelectedItem().toString() + endday_day.getSelectedItem().toString()
+                        put("Answer",new Gson().toJson(answerRequestBody)
+
                         );
                     }}
             );
         }
         else {
+            DateAnswerRequestBody answerRequestBody = new DateAnswerRequestBody(
+                    startday_year.getSelectedItem().toString() + "/" + startday_month.getSelectedItem().toString() + "/" + startday_day.getSelectedItem().toString()
+            );
             nextQuestion(
-                    new HashMap<String, String>(){{
+                    new HashMap<String, Object>(){{
                         put("uuid", LoginFragment.UUID);
-                        put("Answer",startday_year.getSelectedItem().toString() + startday_month.getSelectedItem().toString() + startday_day.getSelectedItem().toString()
-                        );
+                        put("Answer",new Gson().toJson(answerRequestBody));
                     }}
             );
         }

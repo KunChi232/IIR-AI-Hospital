@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         /*
          * Hide title bar
          */
-        getSupportActionBar().hide();;
+        getSupportActionBar().hide();
 
         initRobotApi();
 
@@ -94,5 +94,15 @@ public class MainActivity extends AppCompatActivity {
     private void initUtils() {
         robotAPI = new RobotAPI(this);
         mainActivity = this;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if(robotAPI != null) {
+            robotAPI.release();
+            robotAPI = null;
+        }
     }
 }

@@ -32,7 +32,7 @@ public class OptionFragment extends Fragment {
         Log.d("Positive", "click");
         Log.d("Positive", LoginFragment.UUID);
         nextQuestion(
-                new HashMap<String, String>() {{
+                new HashMap<String, Object>() {{
                     put("uuid", LoginFragment.UUID);
                     put("answer", "1");
                 }}
@@ -40,7 +40,7 @@ public class OptionFragment extends Fragment {
     }
     @OnClick(R.id.imgBtn_negative) void onNegativeClick() {
         nextQuestion(
-                new HashMap<String, String>() {{
+                new HashMap<String, Object>() {{
                     put("uuid", LoginFragment.UUID);
                     put("answer", "0");
                 }}

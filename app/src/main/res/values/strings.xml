@@ -9,4 +9,6 @@
     <string name="language">語言</string>
     <string name="signature">簽名</string>
     <string name="clear_signature">清空</string>
+    <string name="empty">所有欄位皆不可為空</string>
+    <string name="signature_empty">請簽上您的大名</string>
 </resources>

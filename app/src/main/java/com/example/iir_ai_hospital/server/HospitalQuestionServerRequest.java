@@ -46,7 +46,8 @@ public class HospitalQuestionServerRequest {
         return retrofitInterface;
     }
 
-    public static void nextQuestion(Map<String, String> params) {
+    public static void nextQuestion(Map<String, Object> params) {
+        Log.d("params", params.toString());
         HospitalServerClient hospitalServerClient = HospitalQuestionServerRequest.getInstance().getRetrofitInterface();
         hospitalServerClient.nextQuestion(params)
                 .enqueue(new Callback<JsonObject>() {

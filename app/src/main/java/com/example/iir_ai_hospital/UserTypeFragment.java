@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,13 +31,21 @@ public class UserTypeFragment extends Fragment {
     @BindView(R.id.tv_question_number) TextView tv_question_number;
     @BindView(R.id.tv_question) TextView tv_question;
     @OnClick(R.id.imgBtn_nextP) void onNextProblemClick() {
-        nextQuestion(
-                new HashMap<String, String>(){{
-                    put("uuid", LoginFragment.UUID);
-                    put("Answer",userType.getText().toString()
-                            );
-                }}
-        );
+
+        if(userType.getText().toString().trim().length()>0){
+            nextQuestion(
+                    new HashMap<String, Object>(){{
+                        put("uuid", LoginFragment.UUID);
+                        put("Answer",userType.getText().toString()
+                        );
+                    }}
+            );
+        }
+        else {
+            Toast.makeText(getContext(), R.string.empty, Toast.LENGTH_LONG).show();
+        }
+
+
     }
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
         if(LoginFragment.QUESTION_COUNTER == 1) {

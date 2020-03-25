@@ -10,4 +10,6 @@
     <string name="language">Language</string>
     <string name="signature">Signature</string>
     <string name="clear_signature">Clear</string>
+    <string name="empty">Please fill all fields</string>
+    <string name="signature_empty">Please sign your name</string>
 </resources>
