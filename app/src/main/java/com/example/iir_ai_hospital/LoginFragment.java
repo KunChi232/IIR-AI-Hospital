@@ -83,7 +83,7 @@ public class LoginFragment extends Fragment {
     }
 
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        PopBackFragment();
+        JumpNextFragment(MenuFragment.newInstance(), "Menu");
     }
 
     @OnItemSelected(R.id.spinner_language) void onLanguageSelected() {

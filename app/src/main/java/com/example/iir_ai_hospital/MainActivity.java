@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 //        this.getWindow().getDecorView().setSystemUiVisibility(flags);
 
 
-        JumpNextFragment(LoginFragment.newInstance(), "Login");
+        JumpNextFragment(MenuFragment.newInstance(), "Login");
     }
 
     @Override
