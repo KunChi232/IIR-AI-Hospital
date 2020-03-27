@@ -20,12 +20,15 @@ public class Utils {
     public static MainActivity mainActivity;
 
     public static void JumpNextFragment(Fragment f, String name) {
+        if(robotAPI == null) {
+            robotAPI = new RobotAPI(mainActivity);
+        }
         if(mainActivity == null) {
             Log.e("utils","MainActivity is null");
         }
         else {
             if(name.equals("Login")) {
-                clearFragmentPopStack();
+//                clearFragmentPopStack();
                 LoginFragment.QUESTION_COUNTER = 0;
                 LoginFragment.ISEND_FLAG = false;
                 LoginFragment.ISEND = "N";

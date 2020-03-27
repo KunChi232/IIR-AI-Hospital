@@ -48,7 +48,7 @@ public class MultiChoiceFragment extends Fragment {
             LoginFragment.QUESTION_COUNTER --;
             preQuestion(
                     new HashMap<String, String>() {{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                     }}
             );
         }
@@ -90,7 +90,7 @@ public class MultiChoiceFragment extends Fragment {
             btn.setTextSize(30);
             btn.setOnClickListener(view -> nextQuestion(
                     new HashMap<String, Object>() {{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                         put("answer", String.valueOf(j));
                     }}
             ));

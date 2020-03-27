@@ -12,4 +12,7 @@
     <string name="clear_signature">Clear</string>
     <string name="empty">Please fill all fields</string>
     <string name="signature_empty">Please sign your name</string>
+    <string name="tel_home">Tel home</string>
+    <string name="tel_mobile">Tel mobile</string>
+    <string name="address">address</string>
 </resources>

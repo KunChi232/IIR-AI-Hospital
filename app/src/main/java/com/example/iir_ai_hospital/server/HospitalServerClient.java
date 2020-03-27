@@ -21,4 +21,8 @@ public interface HospitalServerClient {
     Call<JsonObject> preQuestion(@Body Map<String, String> params);
     @POST("covid/endQuestion")
     Call<JsonObject> endQuestion(@Body Map<String, String> params);
+    @POST("covid/selfManage")
+    Call<JsonObject> selfManage(@Body Map<String,String> params);
+    @POST("covid/patientProfile")
+    Call<JsonObject> patientProfile(@Body Map<String, String> params);
 }

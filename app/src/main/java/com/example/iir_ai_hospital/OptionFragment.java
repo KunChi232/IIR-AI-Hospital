@@ -30,10 +30,10 @@ public class OptionFragment extends Fragment {
     @BindView(R.id.tv_question_number) TextView tv_question_number;
     @OnClick(R.id.imgBtn_positive) void onPositiveClick() {
         Log.d("Positive", "click");
-        Log.d("Positive", LoginFragment.UUID);
+        Log.d("Positive", MedicalNumberFragment.MEDICAL_NUMBER);
         nextQuestion(
                 new HashMap<String, Object>() {{
-                    put("uuid", LoginFragment.UUID);
+                    put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                     put("answer", "1");
                 }}
         );
@@ -41,7 +41,7 @@ public class OptionFragment extends Fragment {
     @OnClick(R.id.imgBtn_negative) void onNegativeClick() {
         nextQuestion(
                 new HashMap<String, Object>() {{
-                    put("uuid", LoginFragment.UUID);
+                    put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                     put("answer", "0");
                 }}
         );
@@ -60,7 +60,7 @@ public class OptionFragment extends Fragment {
             LoginFragment.ISEND_FLAG = false;
             preQuestion(
                     new HashMap<String, String>() {{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                     }}
             );
         }

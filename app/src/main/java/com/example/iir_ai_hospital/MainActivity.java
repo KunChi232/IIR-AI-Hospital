@@ -6,6 +6,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import com.asus.robotframework.API.RobotAPI;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 //        this.getWindow().getDecorView().setSystemUiVisibility(flags);
 
 
-        JumpNextFragment(MenuFragment.newInstance(), "Login");
+        JumpNextFragment(MenuFragment.newInstance(), "Menu");
     }
 
     @Override
@@ -92,7 +93,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUtils() {
-        robotAPI = new RobotAPI(this);
+        if(robotAPI == null)
+        {
+            robotAPI = new RobotAPI(this);
+        }
+
+        Log.d("MainActivity","initRobotApi");
         mainActivity = this;
     }
 
@@ -105,4 +111,5 @@ public class MainActivity extends AppCompatActivity {
             robotAPI = null;
         }
     }
+
 }

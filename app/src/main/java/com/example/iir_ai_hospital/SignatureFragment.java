@@ -27,6 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.iir_ai_hospital.server.HospitalQuestionServerRequest.preQuestion;
+import static com.example.iir_ai_hospital.server.HospitalQuestionServerRequest.endQuestion;
 import static com.example.iir_ai_hospital.utils.Utils.JumpNextFragment;
 
 public class SignatureFragment extends Fragment {
@@ -48,7 +50,7 @@ public class SignatureFragment extends Fragment {
             LoginFragment.QUESTION_COUNTER --;
             preQuestion(
                     new HashMap<String, String>() {{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                     }}
             );
         }
@@ -61,7 +63,7 @@ public class SignatureFragment extends Fragment {
         if(encoded.trim().length() > 0){
             endQuestion(
                     new HashMap<String, String>() {{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                         put("signature", encoded);
                     }}
             );
@@ -89,60 +91,60 @@ public class SignatureFragment extends Fragment {
         return view;
     }
 
-    private void preQuestion(Map<String, String> params) {
-        HospitalServerClient hospitalServerClient = HospitalQuestionServerRequest.getInstance().getRetrofitInterface();
-        hospitalServerClient.preQuestion(params)
-                .enqueue(new Callback<JsonObject>() {
-                    @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        JsonObject responseObject = response.body();
-                        if(response.isSuccessful() && responseObject != null) {
-                            Question question = new Gson().fromJson(responseObject, Question.class);
+//    private void preQuestion(Map<String, String> params) {
+//        HospitalServerClient hospitalServerClient = HospitalQuestionServerRequest.getInstance().getRetrofitInterface();
+//        hospitalServerClient.preQuestion(params)
+//                .enqueue(new Callback<JsonObject>() {
+//                    @Override
+//                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                        JsonObject responseObject = response.body();
+//                        if(response.isSuccessful() && responseObject != null) {
+//                            Question question = new Gson().fromJson(responseObject, Question.class);
+//
+//                            Log.d("startQuestion", question.getQuestion_type());
+//                            if(question.getQuestion_type().equals("R")) {
+//                                Bundle bundle = new Bundle();
+//                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
+//                                bundle.putString("question_number", question.getQuestion_number());
+//                                JumpNextFragment(OptionFragment.newInstance(bundle), "R");
+//                            }
+//                            else if(question.getQuestion_type().equals("date")) {
+//                                Bundle bundle = new Bundle();
+//                                bundle.putStringArrayList("question", question.getQuestion(LoginFragment.CURRENT_LANG));
+//                                bundle.putString("question_number", question.getQuestion_number());
+//                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "userType");
+//                            }
+//                            else if(question.getQuestion_type().equals("RS")) {
+//                                Bundle bundle = new Bundle();
+//                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
+//                                bundle.putStringArrayList("option", question.getOptions(LoginFragment.CURRENT_LANG));
+//                                bundle.putString("question_number", question.getQuestion_number());
+//                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<JsonObject> call, Throwable t) {
+//
+//                    }
+//                });
+//    }
 
-                            Log.d("startQuestion", question.getQuestion_type());
-                            if(question.getQuestion_type().equals("R")) {
-                                Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
-                                bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(OptionFragment.newInstance(bundle), "R");
-                            }
-                            else if(question.getQuestion_type().equals("date")) {
-                                Bundle bundle = new Bundle();
-                                bundle.putStringArrayList("question", question.getQuestion(LoginFragment.CURRENT_LANG));
-                                bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "userType");
-                            }
-                            else if(question.getQuestion_type().equals("RS")) {
-                                Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
-                                bundle.putStringArrayList("option", question.getOptions(LoginFragment.CURRENT_LANG));
-                                bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
-
-                    }
-                });
-    }
-
-    private void endQuestion(Map<String, String> params) {
-        HospitalServerClient hospitalServerClient =  HospitalQuestionServerRequest.getInstance().getRetrofitInterface();
-        hospitalServerClient.endQuestion(params)
-                .enqueue(new Callback<JsonObject>() {
-                    @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        JumpNextFragment(LoginFragment.newInstance(), "Login");
-                    }
-
-                    @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
-                        Log.d("failed", t.getMessage());
-                    }
-                });
-    }
+//    private void endQuestion(Map<String, String> params) {
+//        HospitalServerClient hospitalServerClient =  HospitalQuestionServerRequest.getInstance().getRetrofitInterface();
+//        hospitalServerClient.endQuestion(params)
+//                .enqueue(new Callback<JsonObject>() {
+//                    @Override
+//                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                        JumpNextFragment(LoginFragment.newInstance(), "Login");
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<JsonObject> call, Throwable t) {
+//                        Log.d("failed", t.getMessage());
+//                    }
+//                });
+//    }
 
 }

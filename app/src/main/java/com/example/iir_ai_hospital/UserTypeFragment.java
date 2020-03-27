@@ -35,7 +35,7 @@ public class UserTypeFragment extends Fragment {
         if(userType.getText().toString().trim().length()>0){
             nextQuestion(
                     new HashMap<String, Object>(){{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                         put("Answer",userType.getText().toString()
                         );
                     }}
@@ -56,7 +56,7 @@ public class UserTypeFragment extends Fragment {
             LoginFragment.ISEND_FLAG = false;
             preQuestion(
                     new HashMap<String, String>() {{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                     }}
             );
         }

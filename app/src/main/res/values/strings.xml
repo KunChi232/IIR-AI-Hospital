@@ -11,4 +11,7 @@
     <string name="clear_signature">清空</string>
     <string name="empty">所有欄位皆不可為空</string>
     <string name="signature_empty">請簽上您的大名</string>
+    <string name="tel_home">市話</string>
+    <string name="tel_mobile">手機</string>
+    <string name="address">地址</string>
 </resources>

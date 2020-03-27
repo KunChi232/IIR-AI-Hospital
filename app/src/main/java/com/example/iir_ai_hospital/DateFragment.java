@@ -54,7 +54,7 @@ public class DateFragment extends Fragment {
             );
             nextQuestion(
                     new HashMap<String, Object>(){{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                         put("Answer",new Gson().toJson(answerRequestBody)
 
                         );
@@ -67,7 +67,7 @@ public class DateFragment extends Fragment {
             );
             nextQuestion(
                     new HashMap<String, Object>(){{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                         put("Answer",new Gson().toJson(answerRequestBody));
                     }}
             );
@@ -82,12 +82,14 @@ public class DateFragment extends Fragment {
             LoginFragment.ISEND_FLAG = false;
             preQuestion(
                     new HashMap<String, String>() {{
-                        put("uuid", LoginFragment.UUID);
+                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
                     }}
             );
         }
     }
-
+    @OnClick(R.id.imgBtn_back) void onBackClick() {
+        JumpNextFragment(LoginFragment.newInstance(), "Login");
+    }
     public static DateFragment newInstance(Bundle args) {
         DateFragment f = new DateFragment();
         f.setArguments(args);

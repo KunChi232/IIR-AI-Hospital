@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment {
     public static String BIRTH = "19850101";
     public static String UUID ;
     public static String ISEND = "N";
-    public static String CURRENT_LANG = "ch";
+//    public static String CURRENT_LANG = "ch";
     public static int QUESTION_COUNTER = 0;
     public static boolean ISEND_FLAG = false;
     private SharedPreferences pref;
@@ -57,7 +57,7 @@ public class LoginFragment extends Fragment {
     @BindView(R.id.spinner_birth_year) Spinner userBirthYear;
     @BindView(R.id.spinner_birth_month) Spinner userBirthMonth;
     @BindView(R.id.spinner_birth_day) Spinner userBirthDay;
-    @BindView(R.id.spinner_language) Spinner spinnerLanguage;
+//    @BindView(R.id.spinner_language) Spinner spinnerLanguage;
 
     @OnClick(R.id.imgBtn_next) void onNextClick() {
 //        signIn(
@@ -75,7 +75,7 @@ public class LoginFragment extends Fragment {
 //                    put("birth", userBirthYear.getSelectedItem().toString() + userBirthMonth.getSelectedItem().toString() + userBirthDay.getSelectedItem().toString());
 //                }}
                 new HashMap<String, String>() {{
-                    put("id_number", "A12345678");
+                    put("id_number",MedicalNumberFragment.MEDICAL_NUMBER);
                     put("name", "珊迪");
                     put("birth", "19850101");
                 }}
@@ -86,19 +86,19 @@ public class LoginFragment extends Fragment {
         JumpNextFragment(MenuFragment.newInstance(), "Menu");
     }
 
-    @OnItemSelected(R.id.spinner_language) void onLanguageSelected() {
-
-        pref.edit().putInt("lang", spinnerLanguage.getSelectedItemPosition()).apply();
-
-        Log.d("onLanguageSelected", spinnerLanguage.getSelectedItem().toString());
-        String lang = spinnerLanguage.getSelectedItem().toString();
-        if(lang.equals("繁體中文")) {
-            switchLanguage("ch");
-        }
-        else if(lang.equals("English")) {
-            switchLanguage("en");
-        }
-    }
+//    @OnItemSelected(R.id.spinner_language) void onLanguageSelected() {
+//
+//        pref.edit().putInt("lang", spinnerLanguage.getSelectedItemPosition()).apply();
+//
+//        Log.d("onLanguageSelected", spinnerLanguage.getSelectedItem().toString());
+//        String lang = spinnerLanguage.getSelectedItem().toString();
+//        if(lang.equals("繁體中文")) {
+//            switchLanguage("ch");
+//        }
+//        else if(lang.equals("English")) {
+//            switchLanguage("en");
+//        }
+//    }
 
 
     public static LoginFragment newInstance() {
@@ -109,7 +109,7 @@ public class LoginFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        pref = getContext().getSharedPreferences("language", Context.MODE_PRIVATE);
+//        pref = getContext().getSharedPreferences("language", Context.MODE_PRIVATE);
     }
 
     @Nullable
@@ -137,27 +137,27 @@ public class LoginFragment extends Fragment {
                             QUESTION_COUNTER ++;
                             if(question.getQuestion_type().equals("R")) {
                                 Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
+                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(OptionFragment.newInstance(bundle), "R");
                             }
                             else if(question.getQuestion_type().equals("T")) {
                                 Bundle bundle = new Bundle();
 //                                bundle.putString("question", question.getQuestion());
-                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
+                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(UserTypeFragment.newInstance(bundle), "T");
                             }
                             else if(question.getQuestion_type().equals("RS")) {
                                 Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion(LoginFragment.CURRENT_LANG).get(0));
-                                bundle.putStringArrayList("option", question.getOptions(LoginFragment.CURRENT_LANG));
+                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                bundle.putStringArrayList("option", question.getOptions(MenuFragment.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
                             }
                             else if(question.getQuestion_type().equals("D")) {
                                 Bundle bundle = new Bundle();
-                                bundle.putStringArrayList("question", question.getQuestion(LoginFragment.CURRENT_LANG));
+                                bundle.putStringArrayList("question", question.getQuestion(MenuFragment.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(DateFragment.newInstance(bundle), "D");
                             }
@@ -200,20 +200,20 @@ public class LoginFragment extends Fragment {
         userBirthDay.setAdapter(dayAdapter);
         userBirthDay.setSelection(currentDay-1);
 
-        String[] language = new String[] {"繁體中文" , "English"};
-        ArrayAdapter<String> langAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, language);
-        langAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-        spinnerLanguage.setAdapter(langAdapter);
-
-        spinnerLanguage.setSelection(pref.getInt("lang",0)); // 0:ch , 1:en
+//        String[] language = new String[] {"繁體中文" , "English"};
+//        ArrayAdapter<String> langAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, language);
+//        langAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+//        spinnerLanguage.setAdapter(langAdapter);
+//
+//        spinnerLanguage.setSelection(pref.getInt("lang",0)); // 0:ch , 1:en
 
     }
 
-    public void switchLanguage(String lang) {
-        if(CURRENT_LANG.equals(lang)){
-            return;
-        }
-        CURRENT_LANG = lang;
-        setLocale(lang);
-    }
+//    public void switchLanguage(String lang) {
+//        if(CURRENT_LANG.equals(lang)){
+//            return;
+//        }
+//        CURRENT_LANG = lang;
+//        setLocale(lang);
+//    }
 }
