@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,18 +46,17 @@ public class LoginFragment extends Fragment {
     public static String NAME = "珊迪";
     public static String ID = "A12345678";
     public static String BIRTH = "19850101";
+    public static String CHART_NO;
+    public static String SEX;
     public static String UUID ;
     public static String ISEND = "N";
 //    public static String CURRENT_LANG = "ch";
     public static int QUESTION_COUNTER = 0;
     public static boolean ISEND_FLAG = false;
     private SharedPreferences pref;
-
-    @BindView(R.id.et_userName) EditText userName;
-    @BindView(R.id.et_userID) EditText userID;
-    @BindView(R.id.spinner_birth_year) Spinner userBirthYear;
-    @BindView(R.id.spinner_birth_month) Spinner userBirthMonth;
-    @BindView(R.id.spinner_birth_day) Spinner userBirthDay;
+    @BindView(R.id.tv_login_name) TextView userName;
+    @BindView(R.id.tv_login_id) TextView userID;
+    @BindView(R.id.tv_login_birth) TextView userBirth;
 //    @BindView(R.id.spinner_language) Spinner spinnerLanguage;
 
     @OnClick(R.id.imgBtn_next) void onNextClick() {
@@ -68,22 +68,28 @@ public class LoginFragment extends Fragment {
 //                }}
 //        );
 //            JumpNextFragment(SignatureFragment.newInstance(), "Signature");
-        startFirstQuestion(
+//        startFirstQuestion(
+////                new HashMap<String, String>() {{
+////                    put("id_number", userID.getText().toString());
+////                    put("name", userName.getText().toString());
+////                    put("birth", userBirthYear.getSelectedItem().toString() + userBirthMonth.getSelectedItem().toString() + userBirthDay.getSelectedItem().toString());
+////                }}
 //                new HashMap<String, String>() {{
-//                    put("id_number", userID.getText().toString());
-//                    put("name", userName.getText().toString());
-//                    put("birth", userBirthYear.getSelectedItem().toString() + userBirthMonth.getSelectedItem().toString() + userBirthDay.getSelectedItem().toString());
+//                    put("id_number",MedicalNumberFragment.MEDICAL_NUMBER);
+//                    put("birth", BIRTH);
+//                    put("name", NAME);
+//                    put("birth", BIRTH);
+//                    put("Chart_No", CHART_NO);
+//                    put("sex", SEX);
+//                    put("topic_id", "1");
 //                }}
-                new HashMap<String, String>() {{
-                    put("id_number",MedicalNumberFragment.MEDICAL_NUMBER);
-                    put("name", "珊迪");
-                    put("birth", "19850101");
-                }}
-        );
+//        );
+
+        JumpNextFragment(MenuFragment.newInstance(null), "Menu");
     }
 
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(MenuFragment.newInstance(), "Menu");
+        JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber");
     }
 
 //    @OnItemSelected(R.id.spinner_language) void onLanguageSelected() {
@@ -101,14 +107,22 @@ public class LoginFragment extends Fragment {
 //    }
 
 
-    public static LoginFragment newInstance() {
-        return new LoginFragment();
+    public static LoginFragment newInstance(Bundle args) {
+        LoginFragment f = new LoginFragment();
+        f.setArguments(args);
+        return f;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        NAME = getArguments().getString("Patient_Name");
+        ID = getArguments().getString("Patient_Id");
+        BIRTH = getArguments().getString("Patient_Birth").replace("-", "/");
+        CHART_NO = getArguments().getString("Chart_No");
+        SEX = getArguments().getString("sex");
 //        pref = getContext().getSharedPreferences("language", Context.MODE_PRIVATE);
     }
 
@@ -117,7 +131,16 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, view);
-        initSpinner(1900);
+
+        try{
+            userName.setText(NAME);
+            userBirth.setText(BIRTH);
+            userID.setText(ID);
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
 
         return view;
     }
@@ -171,49 +194,49 @@ public class LoginFragment extends Fragment {
                 });
     }
 
-    private void initSpinner(int minYear) {
-
-        Calendar calendar = Calendar.getInstance();
-        int currentYear = calendar.get(Calendar.YEAR);
-        int currentMonth = calendar.get(Calendar.MONTH);
-        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
-        Log.d("month", String.valueOf(currentMonth));
-        ArrayList<String> years = new ArrayList<String>();
-        for (int i = currentYear; i >= minYear; i--) {
-            years.add(Integer.toString(i));
-        }
-        ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, years);
-        yearAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-        userBirthYear.setAdapter(yearAdapter);
-        userBirthYear.setSelection(0);
-
-        String[] months = new String[] {"01","02","03","04","05","06","07","08","09","10","11","12"};
-
-        ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, months);
-        monthAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-        userBirthMonth.setAdapter(monthAdapter);
-        userBirthMonth.setSelection(currentMonth);
-
-        String[] days = new String[] {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-        ArrayAdapter<String> dayAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, days);
-        dayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-        userBirthDay.setAdapter(dayAdapter);
-        userBirthDay.setSelection(currentDay-1);
-
-//        String[] language = new String[] {"繁體中文" , "English"};
-//        ArrayAdapter<String> langAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, language);
-//        langAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-//        spinnerLanguage.setAdapter(langAdapter);
+//    private void initSpinner(int minYear) {
 //
-//        spinnerLanguage.setSelection(pref.getInt("lang",0)); // 0:ch , 1:en
-
-    }
-
-//    public void switchLanguage(String lang) {
-//        if(CURRENT_LANG.equals(lang)){
-//            return;
+//        Calendar calendar = Calendar.getInstance();
+//        int currentYear = calendar.get(Calendar.YEAR);
+//        int currentMonth = calendar.get(Calendar.MONTH);
+//        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+//        Log.d("month", String.valueOf(currentMonth));
+//        ArrayList<String> years = new ArrayList<String>();
+//        for (int i = currentYear; i >= minYear; i--) {
+//            years.add(Integer.toString(i));
 //        }
-//        CURRENT_LANG = lang;
-//        setLocale(lang);
+//        ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, years);
+//        yearAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+//        userBirthYear.setAdapter(yearAdapter);
+//        userBirthYear.setSelection(0);
+//
+//        String[] months = new String[] {"01","02","03","04","05","06","07","08","09","10","11","12"};
+//
+//        ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, months);
+//        monthAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+//        userBirthMonth.setAdapter(monthAdapter);
+//        userBirthMonth.setSelection(currentMonth);
+//
+//        String[] days = new String[] {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+//        ArrayAdapter<String> dayAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, days);
+//        dayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+//        userBirthDay.setAdapter(dayAdapter);
+//        userBirthDay.setSelection(currentDay-1);
+//
+////        String[] language = new String[] {"繁體中文" , "English"};
+////        ArrayAdapter<String> langAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_text_view, language);
+////        langAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+////        spinnerLanguage.setAdapter(langAdapter);
+////
+////        spinnerLanguage.setSelection(pref.getInt("lang",0)); // 0:ch , 1:en
+//
 //    }
+//
+////    public void switchLanguage(String lang) {
+////        if(CURRENT_LANG.equals(lang)){
+////            return;
+////        }
+////        CURRENT_LANG = lang;
+////        setLocale(lang);
+////    }
 }

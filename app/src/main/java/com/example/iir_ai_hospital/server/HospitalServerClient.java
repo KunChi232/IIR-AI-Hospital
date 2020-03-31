@@ -1,5 +1,6 @@
 package com.example.iir_ai_hospital.server;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.Map;
@@ -24,5 +25,5 @@ public interface HospitalServerClient {
     @POST("covid/selfManage")
     Call<JsonObject> selfManage(@Body Map<String,String> params);
     @POST("covid/patientProfile")
-    Call<JsonObject> patientProfile(@Body Map<String, String> params);
+    Call<JsonArray> patientProfile(@Body Map<String, String> params);
 }

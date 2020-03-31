@@ -11,17 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+import static com.example.iir_ai_hospital.server.HospitalQuestionServerRequest.medicalNumberToProfile;
 public class MedicalNumberFragment extends Fragment {
     public static String MEDICAL_NUMBER = "test_medical_number";
     @OnClick(R.id.imgBtn_toMenu) void onToMenuClick() {
         if(medicalNumber.getText().toString().trim().length() == 0) {
-            Toast.makeText(getContext(), "請輸入病人病歷號", Toast.LENGTH_LONG);
+            Toast.makeText(getContext(), "請輸入病人身分證字號", Toast.LENGTH_LONG).show();
         } else {
-            MEDICAL_NUMBER = medicalNumber.getText().toString();
+            medicalNumberToProfile(
+                    new HashMap<String, String>() {{
+                        put("id_number", MEDICAL_NUMBER = medicalNumber.getText().toString());
+                    }}
+            );
         }
     }
     @BindView(R.id.et_medical_number) EditText medicalNumber;

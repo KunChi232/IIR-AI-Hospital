@@ -40,11 +40,11 @@ public class SignatureFragment extends Fragment {
         signatureView.clearCanvas();
     }
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(LoginFragment.newInstance(), "Login");
+        JumpNextFragment(MedicalNumberFragment.newInstance(), "Login");
     }
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
         if(LoginFragment.QUESTION_COUNTER == 1) {
-            JumpNextFragment(LoginFragment.newInstance() ,"Login");
+            JumpNextFragment(LoginFragment.newInstance(null) ,"Login");
         }
         else {
             LoginFragment.QUESTION_COUNTER --;

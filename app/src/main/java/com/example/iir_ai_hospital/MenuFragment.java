@@ -14,13 +14,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.iir_ai_hospital.questionObject.Question;
+import com.example.iir_ai_hospital.server.HospitalQuestionServerRequest;
+import com.example.iir_ai_hospital.server.HospitalServerClient;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.iir_ai_hospital.utils.Utils.JumpNextFragment;
 import static com.example.iir_ai_hospital.utils.Utils.setLocale;
@@ -28,7 +39,16 @@ import static com.example.iir_ai_hospital.utils.Utils.setLocale;
 public class MenuFragment extends Fragment {
 
     @OnClick(R.id.btn_patient_fill) void onPatientFillClick() {
-        JumpNextFragment(LoginFragment.newInstance(), "Login");
+//        JumpNextFragment(LoginFragment.newInstance(getArguments()), "Login");
+        startFirstQuestion(                new HashMap<String, String>() {{
+            put("id_number",MedicalNumberFragment.MEDICAL_NUMBER);
+            put("birth", LoginFragment.BIRTH);
+            put("name", LoginFragment.NAME);
+            put("birth", LoginFragment.BIRTH);
+            put("Chart_No", LoginFragment.CHART_NO);
+            put("sex", LoginFragment.SEX);
+            put("topic_id", "1");
+        }});
     }
     @OnClick(R.id.btn_self_management) void onSelfManagementClick() {
         JumpNextFragment(SelfManagementFragment.newInstance(), "SelfManage");
@@ -49,8 +69,10 @@ public class MenuFragment extends Fragment {
     public static String CURRENT_LANG = "ch";
     @BindView(R.id.spinner_language) Spinner spinnerLang;
     private SharedPreferences pref;
-    public static MenuFragment newInstance() {
-        return new MenuFragment();
+    public static MenuFragment newInstance(Bundle args) {
+        MenuFragment f = new MenuFragment();
+        f.setArguments(args);
+        return f;
     }
 
     @Override
@@ -67,6 +89,56 @@ public class MenuFragment extends Fragment {
         initSpinner();
         return view;
     }
+
+    private void startFirstQuestion(Map<String, String> params) {
+        Log.d("startQuestion", "send request");
+        HospitalServerClient hospitalServerClient = HospitalQuestionServerRequest.getInstance().getRetrofitInterface();
+        hospitalServerClient.startQuestion(params)
+                .enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        JsonObject responseObject = response.body();
+                        if(response.isSuccessful() && responseObject != null) {
+                            Question question = new Gson().fromJson(responseObject, Question.class);
+                            LoginFragment.UUID = question.getUuid();
+                            LoginFragment.ISEND = question.getEnd();
+                            LoginFragment.QUESTION_COUNTER ++;
+                            if(question.getQuestion_type().equals("R")) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                bundle.putString("question_number", question.getQuestion_number());
+                                JumpNextFragment(OptionFragment.newInstance(bundle), "R");
+                            }
+                            else if(question.getQuestion_type().equals("T")) {
+                                Bundle bundle = new Bundle();
+//                                bundle.putString("question", question.getQuestion());
+                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                bundle.putString("question_number", question.getQuestion_number());
+                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "T");
+                            }
+                            else if(question.getQuestion_type().equals("RS")) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                bundle.putStringArrayList("option", question.getOptions(MenuFragment.CURRENT_LANG));
+                                bundle.putString("question_number", question.getQuestion_number());
+                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
+                            }
+                            else if(question.getQuestion_type().equals("D")) {
+                                Bundle bundle = new Bundle();
+                                bundle.putStringArrayList("question", question.getQuestion(MenuFragment.CURRENT_LANG));
+                                bundle.putString("question_number", question.getQuestion_number());
+                                JumpNextFragment(DateFragment.newInstance(bundle), "D");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                    }
+                });
+    }
+
 //
     private void initSpinner() {
 

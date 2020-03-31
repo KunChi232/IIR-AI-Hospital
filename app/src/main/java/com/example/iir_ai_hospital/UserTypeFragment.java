@@ -49,7 +49,7 @@ public class UserTypeFragment extends Fragment {
     }
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
         if(LoginFragment.QUESTION_COUNTER == 1) {
-            JumpNextFragment(LoginFragment.newInstance() ,"Login");
+            JumpNextFragment(LoginFragment.newInstance(null) ,"Login");
         }
         else{
             LoginFragment.QUESTION_COUNTER --;
@@ -62,7 +62,7 @@ public class UserTypeFragment extends Fragment {
         }
     }
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(LoginFragment.newInstance() ,"Login");
+        JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login");
     }
     public static UserTypeFragment newInstance(Bundle args) {
         UserTypeFragment fragment = new UserTypeFragment();

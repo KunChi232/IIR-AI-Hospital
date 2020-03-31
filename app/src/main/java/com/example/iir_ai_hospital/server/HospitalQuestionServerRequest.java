@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.example.iir_ai_hospital.DateFragment;
 import com.example.iir_ai_hospital.LoginFragment;
+import com.example.iir_ai_hospital.MedicalCardFragment;
+import com.example.iir_ai_hospital.MedicalNumberFragment;
 import com.example.iir_ai_hospital.MenuFragment;
 import com.example.iir_ai_hospital.MultiChoiceFragment;
 import com.example.iir_ai_hospital.OptionFragment;
@@ -12,8 +14,13 @@ import com.example.iir_ai_hospital.SignatureFragment;
 import com.example.iir_ai_hospital.UserTypeFragment;
 import com.example.iir_ai_hospital.questionObject.Question;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+
+import java.lang.reflect.Type;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -157,7 +164,7 @@ public class HospitalQuestionServerRequest {
                 .enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        JumpNextFragment(LoginFragment.newInstance(), "Login");
+                        JumpNextFragment(MedicalNumberFragment.newInstance(), "Login");
                     }
 
                     @Override
@@ -174,12 +181,35 @@ public class HospitalQuestionServerRequest {
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         JsonObject responseObject = response.body();
                         if(response.isSuccessful() && responseObject != null) {
-                            JumpNextFragment(MenuFragment.newInstance(), "Menu");
+                            JumpNextFragment(MedicalNumberFragment.newInstance(), "Menu");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                    }
+                });
+    }
+    public static void medicalNumberToProfile(Map<String, String> params) {
+        HospitalServerClient hospitalServerClient = HospitalQuestionServerRequest.getInstance().getRetrofitInterface();
+        hospitalServerClient.patientProfile(params)
+                .enqueue(new Callback<JsonArray>() {
+                    @Override
+                    public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                        JsonArray responseObject = response.body();
+                        if(response.isSuccessful() && responseObject != null) {
+//                            Type typeHashMap = new TypeToken<Map<String, String>>(){}.getType();
+//                            Map<String, String> map = new Gson().fromJson(responseObject, typeHashMap);
+                            Log.d("medicalNumberToProfile", responseObject.toString());
+                            Bundle bundle = new Bundle();
+                            bundle.putString("patientProfile", responseObject.toString());
+                            JumpNextFragment(MedicalCardFragment.newInstance(bundle), "MedicalCard");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonArray> call, Throwable t) {
 
                     }
                 });

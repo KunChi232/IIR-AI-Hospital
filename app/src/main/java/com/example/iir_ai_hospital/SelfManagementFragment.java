@@ -37,7 +37,7 @@ public class SelfManagementFragment extends Fragment {
         }
     }
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(MenuFragment.newInstance(), "Menu");
+        JumpNextFragment(MedicalNumberFragment.newInstance(), "Menu");
     }
     public static SelfManagementFragment newInstance() {
         return new SelfManagementFragment();
