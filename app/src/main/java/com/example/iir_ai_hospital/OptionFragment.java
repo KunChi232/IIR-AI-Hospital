@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,8 @@ public class OptionFragment extends Fragment {
 
     @BindView(R.id.tv_question) TextView questions;
     @BindView(R.id.tv_question_number) TextView tv_question_number;
+    @BindView(R.id.imgBtn_previousP)
+    ImageButton previousP;
     @OnClick(R.id.imgBtn_positive) void onPositiveClick() {
         Log.d("Positive", "click");
         Log.d("Positive", MedicalNumberFragment.MEDICAL_NUMBER);
@@ -52,18 +55,15 @@ public class OptionFragment extends Fragment {
     }
 
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
-        if(LoginFragment.QUESTION_COUNTER == 1) {
-            JumpNextFragment(LoginFragment.newInstance(null) ,"Login");
-        }
-        else {
-            LoginFragment.QUESTION_COUNTER --;
-            LoginFragment.ISEND_FLAG = false;
-            preQuestion(
-                    new HashMap<String, String>() {{
-                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
-                    }}
-            );
-        }
+
+        LoginFragment.QUESTION_COUNTER --;
+        LoginFragment.ISEND_FLAG = false;
+        preQuestion(
+                new HashMap<String, String>() {{
+                    put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
+                }}
+        );
+
 
     }
     public static OptionFragment newInstance(Bundle args) {
@@ -87,6 +87,11 @@ public class OptionFragment extends Fragment {
         questions.setText(bundle.getString("question"));
         tv_question_number.setText(bundle.getString("question_number"));
         robotAPI.robot.speak(bundle.getString("question"));
+
+        if(LoginFragment.QUESTION_COUNTER == 1) {
+            previousP.setVisibility(View.INVISIBLE);
+        }
+
         return view;
     }
 

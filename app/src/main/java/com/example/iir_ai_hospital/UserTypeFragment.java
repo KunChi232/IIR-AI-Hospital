@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ public class UserTypeFragment extends Fragment {
     @BindView(R.id.et_userType) EditText userType;
     @BindView(R.id.tv_question_number) TextView tv_question_number;
     @BindView(R.id.tv_question) TextView tv_question;
+    @BindView(R.id.imgBtn_previousP)
+    ImageButton previousP;
     @OnClick(R.id.imgBtn_nextP) void onNextProblemClick() {
 
         if(userType.getText().toString().trim().length()>0){
@@ -48,18 +51,15 @@ public class UserTypeFragment extends Fragment {
 
     }
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
-        if(LoginFragment.QUESTION_COUNTER == 1) {
-            JumpNextFragment(LoginFragment.newInstance(null) ,"Login");
-        }
-        else{
-            LoginFragment.QUESTION_COUNTER --;
-            LoginFragment.ISEND_FLAG = false;
-            preQuestion(
-                    new HashMap<String, String>() {{
-                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
-                    }}
-            );
-        }
+
+        LoginFragment.QUESTION_COUNTER --;
+        LoginFragment.ISEND_FLAG = false;
+        preQuestion(
+                new HashMap<String, String>() {{
+                    put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
+                }}
+        );
+
     }
     @OnClick(R.id.imgBtn_back) void onBackClick() {
         JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login");
@@ -83,6 +83,11 @@ public class UserTypeFragment extends Fragment {
         ButterKnife.bind(this,view);
         tv_question.setText(bundle.getString("question"));
         tv_question_number.setText(bundle.getString("question_number"));
+
+        if(LoginFragment.QUESTION_COUNTER == 1) {
+            previousP.setVisibility(View.INVISIBLE);
+        }
+
         return view;
     }
 

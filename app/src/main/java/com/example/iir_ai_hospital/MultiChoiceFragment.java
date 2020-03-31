@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,23 +36,21 @@ public class MultiChoiceFragment extends Fragment {
     @BindView(R.id.tv_question) TextView tv_question;
     @BindView(R.id.tv_question_number) TextView tv_question_number;
     @BindView(R.id.dynamicLayoutContainer) LinearLayout dynamicLayout;
+    @BindView(R.id.imgBtn_previousP) ImageButton previousP;
 
     @OnClick(R.id.imgBtn_back) void onBackClick() {
         JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login");
     }
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
-        if(LoginFragment.QUESTION_COUNTER == 1) {
-            JumpNextFragment(LoginFragment.newInstance(null) ,"Login");
-        }
-        else{
-            LoginFragment.ISEND_FLAG = false;
-            LoginFragment.QUESTION_COUNTER --;
-            preQuestion(
-                    new HashMap<String, String>() {{
-                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
-                    }}
-            );
-        }
+
+        LoginFragment.ISEND_FLAG = false;
+        LoginFragment.QUESTION_COUNTER --;
+        preQuestion(
+                new HashMap<String, String>() {{
+                    put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
+                }}
+        );
+
 
     }
     public static MultiChoiceFragment newInstance(Bundle args) {
@@ -76,6 +75,10 @@ public class MultiChoiceFragment extends Fragment {
         tv_question_number.setText(bundle.getString("question_number"));
         robotAPI.robot.speak(bundle.getString("question"));
         dynamicButton(Objects.requireNonNull(bundle.getStringArrayList("option")));
+
+        if(LoginFragment.QUESTION_COUNTER == 1) {
+            previousP.setVisibility(View.INVISIBLE);
+        }
         return view;
     }
 

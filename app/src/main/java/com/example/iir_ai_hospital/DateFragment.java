@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -43,6 +44,7 @@ public class DateFragment extends Fragment {
     @BindView(R.id.textView9) TextView tv_endday_month;
     @BindView(R.id.textView10) TextView tv_endday_day;
     @BindView(R.id.tv_question_number) TextView tv_question_number;
+    @BindView(R.id.imgBtn_previousP) ImageButton previousP;
 
     private Bundle bundle;
     private int QUESTUON_NUMBER = 1;
@@ -74,18 +76,15 @@ public class DateFragment extends Fragment {
         }
     }
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
-        if(LoginFragment.QUESTION_COUNTER == 1) {
-            JumpNextFragment(LoginFragment.newInstance(null) ,"Login");
-        }
-        else{
-            LoginFragment.QUESTION_COUNTER --;
-            LoginFragment.ISEND_FLAG = false;
-            preQuestion(
-                    new HashMap<String, String>() {{
-                        put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
-                    }}
-            );
-        }
+
+        LoginFragment.QUESTION_COUNTER --;
+        LoginFragment.ISEND_FLAG = false;
+        preQuestion(
+                new HashMap<String, String>() {{
+                    put("uuid", MedicalNumberFragment.MEDICAL_NUMBER);
+                }}
+        );
+
     }
     @OnClick(R.id.imgBtn_back) void onBackClick() {
         JumpNextFragment(MedicalNumberFragment.newInstance(), "Login");
@@ -111,6 +110,10 @@ public class DateFragment extends Fragment {
 
         tv_question_number.setText(bundle.getString("question_number"));
         initQuestion(bundle.getStringArrayList("question"));
+
+        if(LoginFragment.QUESTION_COUNTER == 1) {
+            previousP.setVisibility(View.INVISIBLE);
+        }
 
         return view;
     }

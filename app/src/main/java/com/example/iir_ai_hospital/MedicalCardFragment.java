@@ -73,7 +73,6 @@ public class MedicalCardFragment extends Fragment {
         TextView patient_chart_no;
         TextView patient_birth;
 
-        String name, birth, _id, sex, chart_no;
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
@@ -86,7 +85,7 @@ public class MedicalCardFragment extends Fragment {
             patient_birth = myview.findViewById(R.id.tv_card_birth);
             patient_chart_no = myview.findViewById(R.id.tv_card_chart_no);
 
-
+            String name, birth, _id, sex, chart_no;
             try {
                 name = jsonArray.getJSONObject(i).get("Patient_Name").toString();
                 birth = jsonArray.getJSONObject(i).get("Birth").toString();
@@ -107,6 +106,8 @@ public class MedicalCardFragment extends Fragment {
                 patient_chart_no.setText(chart_no);
 
                 button.setOnClickListener(view1 -> {
+                    Log.d("patient_name", name);
+                    Log.d("Chart_No", chart_no);
                     Bundle bundle = new Bundle();
                     bundle.putString("Patient_Name", name);
                     bundle.putString("Patient_Birth", birth);
