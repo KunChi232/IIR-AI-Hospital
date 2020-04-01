@@ -15,4 +15,41 @@
     <string name="tel_home">Tel home</string>
     <string name="tel_mobile">Tel mobile</string>
     <string name="address">address</string>
+    <string name="tv_pateint_id">Patient ID</string>
+    <string name="tv_select_pateint_profile">Choose correct one</string>
+    <string name="patient_fill">Patient fill</string>
+    <string name="tv_self_management">Self Management</string>
+    <string name="patient_rule">
+        <li>1. Please keep your hands clean. You should wash your hands with soap or alcoholbased hand sanitizers frequently.
+            In addition, please refrain from touching your
+            eyes, nose and mouth with your hands. If your hands touch any secretions from
+            your respiratory tract, please wash your hands with soap and water thoroughly.\n</li>
+        <li>2. During the 14-day self-health management, please record your temperature, health
+            status, and daily activities twice a day (morning and evening) correctly.\n</li>
+        <li>3. During the period, if you have no symptoms, please still avoid going to public
+            places. When you go outside, please ensure that you wear a medical mask all the
+            time as required.\n</li>
+        <li>4. If you have fever (≥38˚C) or any respiratory symptoms, please put on a medical
+            mask and go to a hospital as soon as possible. Please avoid taking public
+            transportation when you visit the hospital. Please voluntarily inform your
+            physician of your contact history, travel history, residence history, occupational
+            exposure, and whether anyone else has similar symptoms.\n</li>
+        <li>5. During illness, please rest at home, wear a medical mask and avoid going outside.
+            If your mask is contaminated by secretions of nose or mouth, please fold it and
+            throw it into the trash immediately.\n</li>
+        <li>6. During illness, please wear a medical mask and keep at least 1 meter away from
+            others while talking to them.\n</li>
+        <li>7. After you seek medical care, are tested for COVID-19 in the hospital, and return
+            home, please stay at home and do not go outside before you receive your test
+            results. You are still required to conduct self-health management for 14 days even
+            if you test results come back negative. If your symptoms become worse, please
+            make sure to wear a medical mask and contact local health authority or call the
+            toll-free hotline 1922 to obtain instructions on seeking medical attention. Please
+            do not use public transportation to go to the hospital.\n</li>
+        <li>8. Those who flout the self-health management regulations will violate Article 48 or
+            58 of the Communicable Disease Control Act, and be fined ranging from
+            NT$10,000 to NT$300,000 in accordance with Article 67 or 69 of the
+            Communicable Disease Control Act.</li>
+    </string>
+    <string name="rule_confirm">Please confirm</string>
 </resources>

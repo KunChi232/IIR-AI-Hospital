@@ -1,10 +1,17 @@
 package com.example.iir_ai_hospital;
 
+import android.app.Dialog;
+import android.media.Image;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -53,6 +60,31 @@ public class SelfManagementFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_self_management, container, false);
         ButterKnife.bind(this, view);
+
+        ViewDialog alert = new ViewDialog();
+        alert.showDialog();
         return view;
+    }
+
+    private class ViewDialog {
+
+        public void showDialog(){
+            final Dialog dialog = new Dialog(getActivity());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.rule_alert_layout);
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+            ImageButton dialogButton = dialog.findViewById(R.id.imgBtn_confrim);
+            TextView rule = dialog.findViewById(R.id.tv_rule);
+            rule.setMovementMethod(new ScrollingMovementMethod());
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
     }
 }

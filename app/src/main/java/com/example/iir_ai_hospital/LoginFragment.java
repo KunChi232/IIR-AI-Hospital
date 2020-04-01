@@ -160,27 +160,27 @@ public class LoginFragment extends Fragment {
                             QUESTION_COUNTER ++;
                             if(question.getQuestion_type().equals("R")) {
                                 Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(OptionFragment.newInstance(bundle), "R");
                             }
                             else if(question.getQuestion_type().equals("T")) {
                                 Bundle bundle = new Bundle();
 //                                bundle.putString("question", question.getQuestion());
-                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(UserTypeFragment.newInstance(bundle), "T");
                             }
                             else if(question.getQuestion_type().equals("RS")) {
                                 Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
-                                bundle.putStringArrayList("option", question.getOptions(MenuFragment.CURRENT_LANG));
+                                bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
+                                bundle.putStringArrayList("option", question.getOptions(MainActivity.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
                             }
                             else if(question.getQuestion_type().equals("D")) {
                                 Bundle bundle = new Bundle();
-                                bundle.putStringArrayList("question", question.getQuestion(MenuFragment.CURRENT_LANG));
+                                bundle.putStringArrayList("question", question.getQuestion(MainActivity.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(DateFragment.newInstance(bundle), "D");
                             }

@@ -26,12 +26,18 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.example.iir_ai_hospital.utils.Utils.JumpNextFragment;
 
 public class MedicalCardFragment extends Fragment {
 
     @BindView(R.id.listview_card) ListView listView;
+
+
+    @OnClick(R.id.imgBtn_back) void onBackClick() {
+        JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber");
+    }
 
     private JSONArray jsonArray;
     public static MedicalCardFragment newInstance(Bundle args) {
@@ -72,7 +78,6 @@ public class MedicalCardFragment extends Fragment {
         TextView patient_name;
         TextView patient_chart_no;
         TextView patient_birth;
-
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {

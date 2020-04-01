@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.iir_ai_hospital.DateFragment;
 import com.example.iir_ai_hospital.LoginFragment;
+import com.example.iir_ai_hospital.MainActivity;
 import com.example.iir_ai_hospital.MedicalCardFragment;
 import com.example.iir_ai_hospital.MedicalNumberFragment;
 import com.example.iir_ai_hospital.MenuFragment;
@@ -79,25 +80,25 @@ public class HospitalQuestionServerRequest {
                                 }
                                 if (question.getQuestion_type().equals("R")) {
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                    bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                     bundle.putString("question_number", question.getQuestion_number());
                                     JumpNextFragment(OptionFragment.newInstance(bundle), "R");
                                 } else if (question.getQuestion_type().equals("T")) {
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                    bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                     bundle.putString("question_number", question.getQuestion_number());
                                     JumpNextFragment(UserTypeFragment.newInstance(bundle), "T");
                                 } else if (question.getQuestion_type().equals("RS")) {
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
-                                    bundle.putStringArrayList("option", question.getOptions(MenuFragment.CURRENT_LANG));
+                                    bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
+                                    bundle.putStringArrayList("option", question.getOptions(MainActivity.CURRENT_LANG));
                                     bundle.putString("question_number", question.getQuestion_number());
                                     JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
                                 }
                                 else if(question.getQuestion_type().equals("D")) {
                                     Log.d("Date","jump to Date");
                                     Bundle bundle = new Bundle();
-                                    bundle.putStringArrayList("question", question.getQuestion(MenuFragment.CURRENT_LANG));
+                                    bundle.putStringArrayList("question", question.getQuestion(MainActivity.CURRENT_LANG));
                                     bundle.putString("question_number", question.getQuestion_number());
                                     JumpNextFragment(DateFragment.newInstance(bundle), "D");
                                 }
@@ -125,27 +126,27 @@ public class HospitalQuestionServerRequest {
                             Log.d("startQuestion", question.getQuestion_type());
                             if(question.getQuestion_type().equals("R")) {
                                 Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(OptionFragment.newInstance(bundle), "R");
                             }
                             else if(question.getQuestion_type().equals("T")) {
                                 Bundle bundle = new Bundle();
 //                                bundle.putString("question", question.getQuestion().get(0));
-                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
+                                bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(UserTypeFragment.newInstance(bundle), "T");
                             }
                             else if(question.getQuestion_type().equals("RS")) {
                                 Bundle bundle = new Bundle();
-                                bundle.putString("question", question.getQuestion(MenuFragment.CURRENT_LANG).get(0));
-                                bundle.putStringArrayList("option", question.getOptions(MenuFragment.CURRENT_LANG));
+                                bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
+                                bundle.putStringArrayList("option", question.getOptions(MainActivity.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
                             }
                             else if(question.getQuestion_type().equals("D")) {
                                 Bundle bundle = new Bundle();
-                                bundle.putStringArrayList("question", question.getQuestion(MenuFragment.CURRENT_LANG));
+                                bundle.putStringArrayList("question", question.getQuestion(MainActivity.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
                                 JumpNextFragment(DateFragment.newInstance(bundle), "D");
                             }
@@ -181,7 +182,7 @@ public class HospitalQuestionServerRequest {
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         JsonObject responseObject = response.body();
                         if(response.isSuccessful() && responseObject != null) {
-                            JumpNextFragment(MedicalNumberFragment.newInstance(), "Menu");
+                            JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber");
                         }
                     }
 
@@ -191,7 +192,7 @@ public class HospitalQuestionServerRequest {
                     }
                 });
     }
-    public static void medicalNumberToProfile(Map<String, String> params) {
+    public static void getMedicalNumber(Map<String, String> params) {
         HospitalServerClient hospitalServerClient = HospitalQuestionServerRequest.getInstance().getRetrofitInterface();
         hospitalServerClient.patientProfile(params)
                 .enqueue(new Callback<JsonArray>() {
@@ -201,7 +202,7 @@ public class HospitalQuestionServerRequest {
                         if(response.isSuccessful() && responseObject != null) {
 //                            Type typeHashMap = new TypeToken<Map<String, String>>(){}.getType();
 //                            Map<String, String> map = new Gson().fromJson(responseObject, typeHashMap);
-                            Log.d("medicalNumberToProfile", responseObject.toString());
+                            Log.d("getMedicalNumber", responseObject.toString());
                             Bundle bundle = new Bundle();
                             bundle.putString("patientProfile", responseObject.toString());
                             JumpNextFragment(MedicalCardFragment.newInstance(bundle), "MedicalCard");

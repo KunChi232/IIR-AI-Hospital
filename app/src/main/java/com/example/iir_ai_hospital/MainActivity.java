@@ -16,6 +16,9 @@ import static com.example.iir_ai_hospital.utils.Utils.mainActivity;
 import static com.example.iir_ai_hospital.utils.Utils.JumpNextFragment;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static String CURRENT_LANG = "ch";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
