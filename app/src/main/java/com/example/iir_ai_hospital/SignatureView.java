@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.CornerPathEffect;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathEffect;
@@ -40,6 +41,8 @@ public class SignatureView extends View {
 
     public String saveImageToBase64() {
         Bitmap bitmap = Bitmap.createBitmap(this.getWidth(), this.getHeight(), Bitmap.Config.ARGB_8888);
+        bitmap = resizeBitmap(bitmap, 700, 400);
+        Log.d("signature pixel size", bitmap.getWidth() + "x" + bitmap.getHeight());
         Canvas canvas = new Canvas(bitmap);
         this.draw(canvas);
         try {
@@ -51,6 +54,22 @@ public class SignatureView extends View {
         }
     }
 
+    private Bitmap resizeBitmap(Bitmap bitmap, int resizeWidth, int resizeHeight) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float scaleWidth = ((float) resizeWidth) / width;
+        float scaleHeight = ((float) resizeHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bitmap, 0, 0, width, height, matrix, false);
+        bitmap.recycle();
+        return resizedBitmap;
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()) {
