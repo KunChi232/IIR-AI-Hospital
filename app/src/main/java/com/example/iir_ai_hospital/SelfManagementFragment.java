@@ -46,8 +46,10 @@ public class SelfManagementFragment extends Fragment {
     @OnClick(R.id.imgBtn_back) void onBackClick() {
         JumpNextFragment(MedicalNumberFragment.newInstance(), "Menu");
     }
-    public static SelfManagementFragment newInstance() {
-        return new SelfManagementFragment();
+    public static SelfManagementFragment newInstance(Bundle args) {
+        SelfManagementFragment f = new SelfManagementFragment();
+        f.setArguments(args);
+        return f;
     }
     @BindView(R.id.et_userName) EditText userName;
     @BindView(R.id.et_userId) EditText userId;
@@ -61,14 +63,26 @@ public class SelfManagementFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_self_management, container, false);
         ButterKnife.bind(this, view);
 
-        ViewDialog alert = new ViewDialog();
-        alert.showDialog();
+        initAlertDialog();
         return view;
+    }
+
+    private void initAlertDialog() {
+        Bundle bundle = getArguments();
+        int confrim;
+        if(bundle.get("patient_type").equals("normal")) {
+            confrim = R.string.patient_rule;
+        } else {
+            confrim = R.string.meidcal_staff_rule;
+        }
+
+        ViewDialog alert = new ViewDialog();
+        alert.showDialog(confrim);
     }
 
     private class ViewDialog {
 
-        public void showDialog(){
+        public void showDialog(int stringResource){
             final Dialog dialog = new Dialog(getActivity());
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setCancelable(false);
@@ -77,6 +91,7 @@ public class SelfManagementFragment extends Fragment {
 
             ImageButton dialogButton = dialog.findViewById(R.id.imgBtn_confrim);
             TextView rule = dialog.findViewById(R.id.tv_rule);
+            rule.setText(stringResource);
             rule.setMovementMethod(new ScrollingMovementMethod());
             dialogButton.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -7,8 +7,9 @@
 
     <Button
         android:id="@+id/btn_patient_fill"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="50dp"
         android:background="@drawable/menu_button_layout"
         android:text="@string/patient_fill"
         android:textSize="40dp"
@@ -19,13 +20,15 @@
 
     <Button
         android:id="@+id/btn_self_management"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/menu_button_layout"
         android:text="@string/tv_self_management"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_medicalstaff_self_management"
         app:layout_constraintStart_toEndOf="@+id/btn_patient_fill"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,4 +64,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
+
+    <Button
+        android:id="@+id/btn_medicalstaff_self_management"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/menu_button_layout"
+        android:text="護理人員\n自主管理衛教單"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_self_management"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imgBtn_back"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline27"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_white_black" />
 </androidx.constraintlayout.widget.ConstraintLayout>

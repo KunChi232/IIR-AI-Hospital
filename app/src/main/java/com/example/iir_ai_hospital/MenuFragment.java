@@ -38,6 +38,10 @@ import static com.example.iir_ai_hospital.utils.Utils.setLocale;
 
 public class MenuFragment extends Fragment {
 
+    @OnClick(R.id.imgBtn_back) void onBackClick() {
+        JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber");
+    }
+
     @OnClick(R.id.btn_patient_fill) void onPatientFillClick() {
 //        JumpNextFragment(LoginFragment.newInstance(getArguments()), "Login");
         startFirstQuestion(                new HashMap<String, String>() {{
@@ -50,7 +54,14 @@ public class MenuFragment extends Fragment {
         }});
     }
     @OnClick(R.id.btn_self_management) void onSelfManagementClick() {
-        JumpNextFragment(SelfManagementFragment.newInstance(), "SelfManage");
+        Bundle bundle = new Bundle();
+        bundle.putString("patient_type", "normal");
+        JumpNextFragment(SelfManagementFragment.newInstance(bundle), "SelfManage");
+    }
+    @OnClick(R.id.btn_medicalstaff_self_management) void onMedStaffSelfManagementClick() {
+        Bundle bundle = new Bundle();
+        bundle.putString("patient_type", "medical_staff");
+        JumpNextFragment(SelfManagementFragment.newInstance(bundle), "SelfManage");
     }
 //    @OnItemSelected(R.id.spinner_language) void onLanguageSelected() {
 //
