@@ -22,15 +22,16 @@
         android:id="@+id/btn_self_management"
         android:layout_width="0dp"
         android:layout_height="350dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:background="@drawable/menu_button_layout"
         android:text="@string/tv_self_management"
-        android:textSize="40dp"
+        android:textSize="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_medicalstaff_self_management"
         app:layout_constraintStart_toEndOf="@+id/btn_patient_fill"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"/>
 
 <!--    <Spinner-->
 <!--        android:id="@+id/spinner_language"-->
@@ -71,12 +72,13 @@
         android:layout_height="350dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/menu_button_layout"
-        android:text="護理人員\n自主管理衛教單"
-        android:textSize="40dp"
+        android:text="@string/tv_medical_staff_self_management"
+        android:textSize="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_self_management"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"/>
 
     <ImageButton
         android:id="@+id/imgBtn_back"

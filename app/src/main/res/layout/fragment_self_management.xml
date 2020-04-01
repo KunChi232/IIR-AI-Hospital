@@ -33,13 +33,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.025" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:text="@string/user_name"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_id"
@@ -51,7 +50,6 @@
         android:id="@+id/tv_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:text="@string/user_id"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_address"
@@ -62,7 +60,6 @@
         android:id="@+id/tv_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:text="@string/address"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_tel_home"
@@ -73,7 +70,6 @@
         android:id="@+id/tv_tel_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:text="@string/tel_home"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_mobile"
@@ -84,7 +80,6 @@
         android:id="@+id/tv_mobile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:text="@string/tel_mobile"
         android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"

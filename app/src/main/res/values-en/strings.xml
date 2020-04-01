@@ -19,6 +19,7 @@
     <string name="tv_select_pateint_profile">Choose correct one</string>
     <string name="patient_fill">Patient fill</string>
     <string name="tv_self_management">Self Management</string>
+    <string name="tv_medical_staff_self_management">Medical staff\nSelf Management</string>
     <string name="patient_rule">
         <li>1. Please keep your hands clean. You should wash your hands with soap or alcoholbased hand sanitizers frequently.
             In addition, please refrain from touching your
