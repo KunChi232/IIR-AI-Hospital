@@ -44,7 +44,6 @@ public class MenuFragment extends Fragment {
             put("id_number",MedicalNumberFragment.MEDICAL_NUMBER);
             put("birth", LoginFragment.BIRTH);
             put("name", LoginFragment.NAME);
-            put("birth", LoginFragment.BIRTH);
             put("Chart_No", LoginFragment.CHART_NO);
             put("sex", LoginFragment.SEX);
             put("topic_id", "1");
