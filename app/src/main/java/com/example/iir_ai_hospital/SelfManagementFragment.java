@@ -39,6 +39,7 @@ public class SelfManagementFragment extends Fragment {
                         put("address", userAddr.getText().toString());
                         put("tel_phone", userTelHome.getText().toString());
                         put("tel_mobile", userTelMobile.getText().toString());
+                        put("Chart_No", LoginFragment.CHART_NO);
                     }}
             );
         }
