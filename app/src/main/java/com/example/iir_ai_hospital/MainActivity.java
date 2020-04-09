@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,14 +36,13 @@ public class MainActivity extends AppCompatActivity {
          * Hide navigate bar
          * https://stackoverflow.com/questions/21724420/how-to-hide-navigation-bar-permanently-in-android-activity
          */
-        final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        this.getWindow().getDecorView().setSystemUiVisibility(flags);
 
+        final int flags = View.SYSTEM_UI_LAYOUT_FLAGS
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE;
+        this.getWindow().getDecorView().setSystemUiVisibility(flags);
+        updateUI();
 
         JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber","lr");
 //        JumpNextFragment(MenuFragment.newInstance(), "MedicalNumber");
@@ -60,7 +60,18 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_ALL);
         }
     }
-
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        // hide navigate bar
+        updateUI();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // hide navigate bar
+        updateUI();
+    }
     private void initRobotApi() {
         initUtils();
         /*
@@ -75,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         /*
          * Avoid keyboard pop out in Fragment contain editText
          */
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         /*
          * very important
@@ -117,5 +128,21 @@ public class MainActivity extends AppCompatActivity {
             robotAPI = null;
         }
     }
-
+    public void updateUI() {
+        final View decorView = getWindow().getDecorView();
+        decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                    decorView.setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                }
+            }
+        });
+    }
 }
