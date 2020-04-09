@@ -118,6 +118,7 @@ public class MedicalCardFragment extends Fragment {
                     bundle.putString("Patient_Birth", birth);
                     bundle.putString("Patient_Id", _id);
                     bundle.putString("Chart_No", chart_no);
+                    bundle.putString("sex", sex);
                     JumpNextFragment(LoginFragment.newInstance(bundle), "Login");
                 });
 

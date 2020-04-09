@@ -59,7 +59,10 @@ public class SignatureFragment extends Fragment {
 
     @OnClick(R.id.imgBtn_send) void onSignatureSendClick() {
         String encoded = signatureView.saveImageToBase64();
-        Log.d("signature", encoded);
+        final int chunkSize = 2048;
+        for (int i = 0; i < encoded.length(); i += chunkSize) {
+            Log.d("signature", encoded.substring(i, Math.min(encoded.length(), i + chunkSize)));
+        }
         if(encoded.trim().length() > 0){
             endQuestion(
                     new HashMap<String, String>() {{

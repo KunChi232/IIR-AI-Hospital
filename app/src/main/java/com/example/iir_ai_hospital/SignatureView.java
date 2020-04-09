@@ -2,6 +2,7 @@ package com.example.iir_ai_hospital;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.CornerPathEffect;
@@ -41,11 +42,11 @@ public class SignatureView extends View {
 
     public String saveImageToBase64() {
         Bitmap bitmap = Bitmap.createBitmap(this.getWidth(), this.getHeight(), Bitmap.Config.ARGB_8888);
-        bitmap = resizeBitmap(bitmap, 700, 400);
         Log.d("signature pixel size", bitmap.getWidth() + "x" + bitmap.getHeight());
         Canvas canvas = new Canvas(bitmap);
         this.draw(canvas);
         try {
+            bitmap = resizeBitmap(bitmap, 700, 400);
             String encoded = new SaveImage(bitmap).execute().get();
             return encoded;
         } catch (Exception e) {
@@ -65,8 +66,7 @@ public class SignatureView extends View {
         matrix.postScale(scaleWidth, scaleHeight);
 
         // "RECREATE" THE NEW BITMAP
-        Bitmap resizedBitmap = Bitmap.createBitmap(
-                bitmap, 0, 0, width, height, matrix, false);
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, resizeWidth, resizeHeight, false);
         bitmap.recycle();
         return resizedBitmap;
     }
