@@ -33,29 +33,29 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_white_black" />
+        app:srcCompat="@drawable/exit" />
 
     <ImageButton
         android:id="@+id/imgBtn_previousP"
-        android:layout_width="50dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
-        app:srcCompat="@drawable/back_white_black" />
+        app:srcCompat="@drawable/back" />
 
     <ImageButton
         android:id="@+id/imgBtn_send"
-        android:layout_width="50dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline18"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
-        app:srcCompat="@drawable/next_white" />
+        app:srcCompat="@drawable/next" />
 
     <com.example.iir_ai_hospital.SignatureView
         android:id="@+id/signatureView"

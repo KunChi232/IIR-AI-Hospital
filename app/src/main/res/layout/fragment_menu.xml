@@ -86,7 +86,7 @@
         android:layout_height="100dp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/guideline27"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_white_black" />
+        app:srcCompat="@drawable/exit" />
 </androidx.constraintlayout.widget.ConstraintLayout>
