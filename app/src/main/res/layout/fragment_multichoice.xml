@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:drawable/dialog_holo_light_frame"
-        app:layout_constraintBottom_toTopOf="@+id/guideline14"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toTopOf="@+id/guideline10" />
@@ -109,15 +109,15 @@
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/dynamicLayoutContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:alignContent="stretch"
         app:alignItems="stretch"
         app:flexWrap="wrap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
-        app:layout_constraintTop_toTopOf="@+id/guideline14">
+        app:layout_constraintTop_toTopOf="@+id/guideline15">
 
     </com.google.android.flexbox.FlexboxLayout>
     <TextView

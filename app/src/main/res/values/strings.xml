@@ -14,7 +14,7 @@
     <string name="tel_home">市話</string>
     <string name="tel_mobile">手機</string>
     <string name="address">地址</string>
-    <string name="tv_pateint_id">病人身分證</string>
+    <string name="tv_pateint_id">病人身分證字號</string>
     <string name="tv_select_pateint_profile">選擇正確的病患資訊</string>
     <string name="patient_fill">病人填寫表</string>
     <string name="tv_self_management">自主管理衛教單</string>

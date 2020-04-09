@@ -29,9 +29,11 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/btn_positive"
+        android:cropToPadding="false"
+        android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/positive_circle" />
+        app:srcCompat="@drawable/small_circle" />
 
     <TextView
         android:id="@+id/tv_rule"

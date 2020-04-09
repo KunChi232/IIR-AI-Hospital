@@ -12,8 +12,10 @@
         android:background="@android:drawable/dialog_holo_light_frame"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline20"
-        app:layout_constraintTop_toTopOf="@+id/guideline19" />
+        app:layout_constraintTop_toTopOf="@+id/guideline19"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline19"
@@ -97,7 +99,7 @@
         android:layout_height="wrap_content"
         android:text="停留結束日期"
         android:textSize="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/tv_question"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -176,11 +178,12 @@
         app:layout_constraintTop_toTopOf="@+id/spinner_startday_day" />
 
     <Spinner
-        style="@android:style/Widget.Holo.Light.Spinner"
         android:id="@+id/spinner_endday_year"
+        style="@android:style/Widget.Holo.Light.Spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toStartOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/tv_endday"
         app:layout_constraintTop_toBottomOf="@+id/tv_endday" />

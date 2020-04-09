@@ -15,7 +15,7 @@
     <string name="tel_home">Tel home</string>
     <string name="tel_mobile">Tel mobile</string>
     <string name="address">address</string>
-    <string name="tv_pateint_id">Patient ID</string>
+    <string name="tv_pateint_id">Patient social security number</string>
     <string name="tv_select_pateint_profile">Choose correct one</string>
     <string name="patient_fill">Patient fill</string>
     <string name="tv_self_management">Self Management</string>

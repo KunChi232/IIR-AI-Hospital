@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="350dp"
         android:layout_marginStart="50dp"
-        android:background="@drawable/menu_button_layout"
+        android:background="@drawable/menu_button_layout_blue"
         android:text="@string/patient_fill"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,14 +24,14 @@
         android:layout_height="350dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:background="@drawable/menu_button_layout"
+        android:background="@drawable/menu_button_layout_green"
+        android:padding="10dp"
         android:text="@string/tv_self_management"
         android:textSize="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_medicalstaff_self_management"
         app:layout_constraintStart_toEndOf="@+id/btn_patient_fill"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="10dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 <!--    <Spinner-->
 <!--        android:id="@+id/spinner_language"-->
@@ -71,14 +71,14 @@
         android:layout_width="0dp"
         android:layout_height="350dp"
         android:layout_marginEnd="50dp"
-        android:background="@drawable/menu_button_layout"
+        android:background="@drawable/menu_button_layout_green"
+        android:padding="10dp"
         android:text="@string/tv_medical_staff_self_management"
         android:textSize="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_self_management"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="10dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imgBtn_back"
