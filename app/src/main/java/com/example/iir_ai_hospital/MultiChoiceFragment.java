@@ -1,7 +1,6 @@
 package com.example.iir_ai_hospital;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
+import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,9 +36,8 @@ public class MultiChoiceFragment extends Fragment {
 
     @BindView(R.id.tv_question) TextView tv_question;
     @BindView(R.id.tv_question_number) TextView tv_question_number;
-    @BindView(R.id.dynamicLayoutContainer) LinearLayout dynamicLayout;
     @BindView(R.id.imgBtn_previousP) ImageButton previousP;
-
+    @BindView(R.id.dynamicLayoutContainer) FlexboxLayout dynamicLayout;
     @OnClick(R.id.imgBtn_back) void onBackClick() {
         JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login");
     }
@@ -100,5 +100,6 @@ public class MultiChoiceFragment extends Fragment {
 
             dynamicLayout.addView(btn, lp);
         }
+
     }
 }
