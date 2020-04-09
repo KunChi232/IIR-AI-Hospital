@@ -39,7 +39,7 @@ import static com.example.iir_ai_hospital.utils.Utils.setLocale;
 public class MenuFragment extends Fragment {
 
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber");
+        JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber", "rl");
     }
 
     @OnClick(R.id.btn_patient_fill) void onPatientFillClick() {
@@ -56,12 +56,12 @@ public class MenuFragment extends Fragment {
     @OnClick(R.id.btn_self_management) void onSelfManagementClick() {
         Bundle bundle = new Bundle();
         bundle.putString("patient_type", "normal");
-        JumpNextFragment(SelfManagementFragment.newInstance(bundle), "SelfManage");
+        JumpNextFragment(SelfManagementFragment.newInstance(bundle), "SelfManage", "lr");
     }
     @OnClick(R.id.btn_medicalstaff_self_management) void onMedStaffSelfManagementClick() {
         Bundle bundle = new Bundle();
         bundle.putString("patient_type", "medical_staff");
-        JumpNextFragment(SelfManagementFragment.newInstance(bundle), "SelfManage");
+        JumpNextFragment(SelfManagementFragment.newInstance(bundle), "SelfManage", "lr");
     }
 //    @OnItemSelected(R.id.spinner_language) void onLanguageSelected() {
 //
@@ -117,27 +117,27 @@ public class MenuFragment extends Fragment {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(OptionFragment.newInstance(bundle), "R");
+                                JumpNextFragment(OptionFragment.newInstance(bundle), "R", "lr");
                             }
                             else if(question.getQuestion_type().equals("T")) {
                                 Bundle bundle = new Bundle();
 //                                bundle.putString("question", question.getQuestion());
                                 bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "T");
+                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "T", "lr");
                             }
                             else if(question.getQuestion_type().equals("RS")) {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putStringArrayList("option", question.getOptions(MainActivity.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
+                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS", "lr");
                             }
                             else if(question.getQuestion_type().equals("D")) {
                                 Bundle bundle = new Bundle();
                                 bundle.putStringArrayList("question", question.getQuestion(MainActivity.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(DateFragment.newInstance(bundle), "D");
+                                JumpNextFragment(DateFragment.newInstance(bundle), "D", "lr");
                             }
                         }
                     }

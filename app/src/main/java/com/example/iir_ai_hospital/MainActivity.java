@@ -35,14 +35,16 @@ public class MainActivity extends AppCompatActivity {
          * Hide navigate bar
          * https://stackoverflow.com/questions/21724420/how-to-hide-navigation-bar-permanently-in-android-activity
          */
-//        final int flags = View.SYSTEM_UI_LAYOUT_FLAGS
-//                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN
-//                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-//        this.getWindow().getDecorView().setSystemUiVisibility(flags);
+        final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        this.getWindow().getDecorView().setSystemUiVisibility(flags);
 
 
-        JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber");
+        JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber","lr");
 //        JumpNextFragment(MenuFragment.newInstance(), "MedicalNumber");
     }
 

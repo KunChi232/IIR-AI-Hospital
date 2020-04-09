@@ -62,7 +62,7 @@ public class UserTypeFragment extends Fragment {
 
     }
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login");
+        JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login", "rl");
     }
     public static UserTypeFragment newInstance(Bundle args) {
         UserTypeFragment fragment = new UserTypeFragment();

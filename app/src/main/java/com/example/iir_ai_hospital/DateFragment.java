@@ -87,7 +87,7 @@ public class DateFragment extends Fragment {
 
     }
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(MedicalNumberFragment.newInstance(), "Login");
+        JumpNextFragment(MedicalNumberFragment.newInstance(), "Login", "rl");
     }
     public static DateFragment newInstance(Bundle args) {
         DateFragment f = new DateFragment();

@@ -51,7 +51,7 @@ public class OptionFragment extends Fragment {
     }
 
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login");
+        JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login", "rl");
     }
 
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {

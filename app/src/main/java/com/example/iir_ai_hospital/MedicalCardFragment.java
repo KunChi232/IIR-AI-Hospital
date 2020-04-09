@@ -36,7 +36,7 @@ public class MedicalCardFragment extends Fragment {
 
 
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber");
+        JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber", "rl");
     }
 
     private JSONArray jsonArray;
@@ -119,7 +119,7 @@ public class MedicalCardFragment extends Fragment {
                     bundle.putString("Patient_Id", _id);
                     bundle.putString("Chart_No", chart_no);
                     bundle.putString("sex", sex);
-                    JumpNextFragment(LoginFragment.newInstance(bundle), "Login");
+                    JumpNextFragment(LoginFragment.newInstance(bundle), "Login", "lr");
                 });
 
             }

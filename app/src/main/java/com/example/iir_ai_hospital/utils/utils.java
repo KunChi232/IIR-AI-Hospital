@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.asus.robotframework.API.RobotAPI;
 import com.example.iir_ai_hospital.LoginFragment;
@@ -19,7 +20,7 @@ public class Utils {
     public static RobotAPI robotAPI;
     public static MainActivity mainActivity;
 
-    public static void JumpNextFragment(Fragment f, String name) {
+    public static void JumpNextFragment(Fragment f, String name, String animDirection) {
         if(robotAPI == null) {
             robotAPI = new RobotAPI(mainActivity);
         }
@@ -35,11 +36,14 @@ public class Utils {
             }
             robotAPI.robot.stopSpeak();
 
-            mainActivity.getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_container, f)
-                    .addToBackStack(name)
-                    .commit();
+            FragmentTransaction transaction = mainActivity.getSupportFragmentManager().beginTransaction();
+            if(animDirection.equals("lr"))
+                transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+            else
+                transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+
+            transaction.replace(R.id.main_container, f)
+            .commit();
         }
     }
 

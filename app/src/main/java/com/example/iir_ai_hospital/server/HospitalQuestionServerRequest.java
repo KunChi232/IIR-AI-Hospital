@@ -68,7 +68,7 @@ public class HospitalQuestionServerRequest {
 
                             if(LoginFragment.ISEND_FLAG){
                                 Log.d("Jump", "Jump to sign fragment");
-                                JumpNextFragment(SignatureFragment.newInstance(), "sign");
+                                JumpNextFragment(SignatureFragment.newInstance(), "sign", "lr");
                             }
                             else {
 
@@ -82,25 +82,25 @@ public class HospitalQuestionServerRequest {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                     bundle.putString("question_number", question.getQuestion_number());
-                                    JumpNextFragment(OptionFragment.newInstance(bundle), "R");
+                                    JumpNextFragment(OptionFragment.newInstance(bundle), "R", "lr");
                                 } else if (question.getQuestion_type().equals("T")) {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                     bundle.putString("question_number", question.getQuestion_number());
-                                    JumpNextFragment(UserTypeFragment.newInstance(bundle), "T");
+                                    JumpNextFragment(UserTypeFragment.newInstance(bundle), "T", "lr");
                                 } else if (question.getQuestion_type().equals("RS")) {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                     bundle.putStringArrayList("option", question.getOptions(MainActivity.CURRENT_LANG));
                                     bundle.putString("question_number", question.getQuestion_number());
-                                    JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
+                                    JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS", "lr");
                                 }
                                 else if(question.getQuestion_type().equals("D")) {
                                     Log.d("Date","jump to Date");
                                     Bundle bundle = new Bundle();
                                     bundle.putStringArrayList("question", question.getQuestion(MainActivity.CURRENT_LANG));
                                     bundle.putString("question_number", question.getQuestion_number());
-                                    JumpNextFragment(DateFragment.newInstance(bundle), "D");
+                                    JumpNextFragment(DateFragment.newInstance(bundle), "D", "lr");
                                 }
                             }
                         }
@@ -128,27 +128,27 @@ public class HospitalQuestionServerRequest {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(OptionFragment.newInstance(bundle), "R");
+                                JumpNextFragment(OptionFragment.newInstance(bundle), "R", "rl");
                             }
                             else if(question.getQuestion_type().equals("T")) {
                                 Bundle bundle = new Bundle();
 //                                bundle.putString("question", question.getQuestion().get(0));
                                 bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "T");
+                                JumpNextFragment(UserTypeFragment.newInstance(bundle), "T", "rl");
                             }
                             else if(question.getQuestion_type().equals("RS")) {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("question", question.getQuestion(MainActivity.CURRENT_LANG).get(0));
                                 bundle.putStringArrayList("option", question.getOptions(MainActivity.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS");
+                                JumpNextFragment(MultiChoiceFragment.newInstance(bundle), "RS", "rl");
                             }
                             else if(question.getQuestion_type().equals("D")) {
                                 Bundle bundle = new Bundle();
                                 bundle.putStringArrayList("question", question.getQuestion(MainActivity.CURRENT_LANG));
                                 bundle.putString("question_number", question.getQuestion_number());
-                                JumpNextFragment(DateFragment.newInstance(bundle), "D");
+                                JumpNextFragment(DateFragment.newInstance(bundle), "D", "rl");
                             }
                         }
                     }
@@ -165,7 +165,7 @@ public class HospitalQuestionServerRequest {
                 .enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        JumpNextFragment(MedicalNumberFragment.newInstance(), "Login");
+                        JumpNextFragment(MedicalNumberFragment.newInstance(), "Login", "rl");
                     }
 
                     @Override
@@ -182,7 +182,7 @@ public class HospitalQuestionServerRequest {
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         JsonObject responseObject = response.body();
                         if(response.isSuccessful() && responseObject != null) {
-                            JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber");
+                            JumpNextFragment(MedicalNumberFragment.newInstance(), "MedicalNumber", "rl");
                         }
                     }
 
@@ -205,7 +205,7 @@ public class HospitalQuestionServerRequest {
                             Log.d("getMedicalNumber", responseObject.toString());
                             Bundle bundle = new Bundle();
                             bundle.putString("patientProfile", responseObject.toString());
-                            JumpNextFragment(MedicalCardFragment.newInstance(bundle), "MedicalCard");
+                            JumpNextFragment(MedicalCardFragment.newInstance(bundle), "MedicalCard", "lr");
                         }
                     }
 

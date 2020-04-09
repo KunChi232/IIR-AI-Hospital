@@ -39,7 +39,7 @@ public class MultiChoiceFragment extends Fragment {
     @BindView(R.id.imgBtn_previousP) ImageButton previousP;
     @BindView(R.id.dynamicLayoutContainer) FlexboxLayout dynamicLayout;
     @OnClick(R.id.imgBtn_back) void onBackClick() {
-        JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login");
+        JumpNextFragment(MedicalNumberFragment.newInstance() ,"Login", "rl");
     }
     @OnClick(R.id.imgBtn_previousP) void onPreQuestionClick() {
 
